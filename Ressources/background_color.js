@@ -4,7 +4,7 @@ var compteur=0;
 
 function change() {
 
-    $("body").css("background-color", 'rgb('+ r + ','+ g + ','+ b + ')');
+    //$("body").css("background-color", 'rgb('+ r + ','+ g + ','+ b + ')');
 
     switch (phase) {
         case 1 ://0 255 204
