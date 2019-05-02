@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<link rel="stylesheet" href="Ressources/style.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-app.js"></script>
+
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js"></script>
+
+<script src="Ressources/init_firebase.js" ></script>
+<script src="Ressources/fonction_firebase.js" ></script>
+<script src="Ressources/background_color.js" ></script>
+<script src="Ressources/gere_html.js" ></script>
+<script src="Ressources/utils.js" ></script>
+
+<body>
+
+<div id="body">
+
+    <div id="accueil">
+
+        <button type="button" class="btn btn-dark" onclick="creerPartieMenu()">Créer une partie</button>
+        <button type="button" class="btn btn-dark" onclick="rejoindrePartieMenu()">Rejoindre une partie</button>
+
+    </div>
+
+    <div id="creerUnePartie">
+
+        <img alt="left arrow" class="left_arrow" src="Ressources/img/left_arrow.png">
+
+        <input id="input_pseudo_creer" class="input_txt" type="text" value="" placeholder="Pseudo"/>
+        <div>
+            <input type="file" id="file_1" class="inputfile" onchange="onFileSelected(event,'myimage_creer')">
+            <span class="file-select-button">Choisir mon image</span>
+            <img class="img_profile_menu" id="myimage_creer" alt="" src="img_avatar1.png"/>
+        </div>
+        <button type="button" id="btn_creer_partie" class="btn btn-dark" onclick="creerUnePartie()">Créer une partie</button>
+
+    </div>
+
+
+    <div id="rejoindreUnePartie">
+
+        <img alt="left arrow" class="left_arrow" src="Ressources/img/left_arrow.png">
+
+        <input id="input_pseudo_rejoindre" class="input_txt" type="text" value="" placeholder="Pseudo"/>
+        <input id="input_code_rejoindre" class="input_txt" type="text" value="" placeholder="Code"/>
+
+        <div>
+            <input type="file" id="file_2" class="inputfile" onchange="onFileSelected(event,'myimage')">
+            <span class="file-select-button">Choisir mon image</span>
+            <img class="img_profile_menu" id="myimage" alt="" src="img_avatar1.png"/>
+        </div>
+        <button type="button" id="btn_creer_rejoindre" class="btn btn-dark" onclick="rejoindreUnePartie()">Rejoindre la partie</button>
+
+
+    </div>
+
+    <h1 id="code"></h1>
+
+    <div id="game_info">
+
+        <button type="button" id="btnLancerPartie" style="display: none" class="btn btn-dark" onclick="">Lancer la partie</button>
+
+        <div id="contenu"></div>
+
+
+    </div>
+
+</div>
+
+</body>
+</html>

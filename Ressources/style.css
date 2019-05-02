@@ -1,0 +1,101 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+#body {
+    height: 100%;
+    width: 100%;
+    display:flex;justify-content:center;align-items:center;
+}
+
+.btn-dark{
+    width: 96%;
+    margin: 2%;
+    height: 75px;
+}
+
+#Accueil{
+    margin:30%;
+    display:block;
+}
+
+#rejoindreUnePartie{
+    display: none;
+    margin:30%;
+}
+
+#creerUnePartie{
+    display: none;
+    margin:30%;
+}
+
+#game_info{
+    display: none;
+    margin-top: 10%;
+}
+
+.input_txt{
+    width: 96%;
+    margin: 2%;
+    height: 45px;
+    border-radius: 5px;
+    padding-left: 25px;
+    padding-right: 25px;
+    text-align: center;
+    border: 2px solid #606A75;
+    font-family: montserrat,Helvetica,arial,sans-serif;
+    font-weight: bolder;
+}
+
+.input_txt:focus{
+    border: 3px solid #343a40;
+}
+
+.left_arrow{
+    position: absolute;
+    width: 8%;
+    top:3%;
+    left:3%;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+.card-title{
+    text-align: center;
+}
+
+.card{
+    margin: 20px;
+    horiz-align: center;
+}
+
+#contenu{
+    display: inline;
+}
+
+.img_profile_menu{
+    max-height: 15%;
+    max-width: 15%;
+    display: inline;
+}
+
+.file-select-button {
+   color: #00b1ca;
+   font-weight: bold;
+    cursor: pointer;
+    margin-left: 15px;
+    margin-right: 10px;
+}
+
+.inputfile {
+   display: none;
+}
+
+#code{
+    display: none;
+    position: absolute;
+    top:10px;
+    width: 100%;
+    text-align: center;
+}
