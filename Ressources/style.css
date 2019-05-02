@@ -12,12 +12,12 @@ html, body {
 .btn-dark{
     width: 96%;
     margin: 2%;
-    height: 75px;
+    height: 150px;
 }
 
-#Accueil{
-    margin:30%;
-    width: 40%;
+#accueil{
+    margin:10%;
+    width: 80%;
     display:block;
 }
 
