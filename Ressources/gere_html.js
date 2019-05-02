@@ -43,6 +43,24 @@ $(document).on("click", ".left_arrow", function(){
     $("#accueil").show();
 });
 
+var angle1 = 0;
+
+$(document).on("click", "#rotate_1", function(){
+    angle1 += 90;
+    $("#myimage").css('transform','rotate(' + angle1 + 'deg)');
+    $("#myimage").data('transform',angle1);
+});
+
+var angle2 = 0;
+
+$(document).on("click", "#rotate_2", function(){
+    angle2 += 90;
+    $("#myimage_creer").css('transform','rotate(' + angle2 + 'deg)');
+    $("#myimage_creer").data("transform",angle2)
+});
+
+
+
 
 
 $(document).on("click", ".file-select-button", function(){
