@@ -1,6 +1,7 @@
 html, body {
     height: 100%;
     margin: 0;
+    font-size: 60px;
 }
 
 #body {
@@ -39,8 +40,8 @@ html, body {
 .input_txt{
     width: 96%;
     margin: 2%;
-    height: 45px;
-    border-radius: 5px;
+    height: 100px;
+    border-radius: 10px;
     padding-left: 25px;
     padding-right: 25px;
     text-align: center;
