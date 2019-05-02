@@ -6,9 +6,7 @@ function showUser(user){
 
     $("#contenu").html("");
     $("#btnLancerPartie").hide();
-    $("#body").css("display","block");
-    $("#body").css("justify-content","");
-    $("#body").css("align-items","");
+
 
     var k=0;
 
@@ -22,13 +20,17 @@ function showUser(user){
         if (user.hasOwnProperty(key)) {
             $("#contenu").append("<div class=\"card\" style=\"width: 20%;display:inline-block\">\n" +
                 "<img class=\"card-img-top\" src="+ user[key].image +" alt=\"Card image\" style=\"width:100%\">\n" +
-                "<div class=\"card-body\">\n" +
-                "<h4 class=\"card-title\">"+ user[key].username +"</h4>\n" +
-                "</div>" +
+                "<div class=\"card-title\">"+ user[key].username +"</div>\n" +
                 "</div>");
         }
         k++;
     }
+
+    $("#spinner").hide();
+    $("#body").show();
+    $("#body").css("display","block");
+    $("#body").css("justify-content","");
+    $("#body").css("align-items","");
 
 }
 
@@ -37,9 +39,12 @@ function creerUnePartie() {
     var username = $("#input_pseudo_creer").val();
 
     if (username == "") {
-        alert("Il faut saisir un pseudo!");
+        showAlert("Il faut saisir un pseudo!");
         return;
     }
+
+    $("#body").hide();
+    showSpinner();
 
     var partieRef = firebase.database().ref("partie/");
 
@@ -95,13 +100,22 @@ function creerUnePartie() {
 
 function rejoindreUnePartie(){
 
+
     code = $("#input_code_rejoindre").val();
     var username = $("#input_pseudo_rejoindre").val();
 
     if (code == ""){ //Le code est mauvais
-        alert("Il faut saisir un code");
+        showAlert("Il faut saisir un code");
         return;
     }
+
+    if (username == "") {
+        showAlert("Il faut saisir un pseudo!");
+        return;
+    }
+
+    $("#body").hide();
+    showSpinner();
 
     var codeRef = firebase.database().ref("partie/"+code);
 
@@ -110,7 +124,10 @@ function rejoindreUnePartie(){
         var gameJSON = snapshot.val();
 
         if (gameJSON == undefined){ //Le code est mauvais
-            alert("La partie que vous essayez de joindre n'existe pas");
+            $("#body").show();
+            $("#spinner").hide();
+            showAlert("La partie que vous essayez de joindre n'existe pas");
+            return;
         }
         else{
 
@@ -121,7 +138,9 @@ function rejoindreUnePartie(){
                     lastkey = key;
 
                     if (gameJSON.players[key].username == username){
-                        alert("l'identifiant est déjà utilisé");
+                        $("#body").show();
+                        $("#spinner").hide();
+                        showAlert("L'identifiant est déjà utilisé");
                         return;
                     }
 

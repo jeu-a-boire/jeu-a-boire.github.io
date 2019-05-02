@@ -1,6 +1,5 @@
 var r=51,g=204,b=204;
 var phase = 1;
-var compteur=0;
 
 function change() {
 

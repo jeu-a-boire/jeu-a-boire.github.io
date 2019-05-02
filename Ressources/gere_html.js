@@ -8,8 +8,14 @@ function rejoindrePartieMenu(){
     $("#rejoindreUnePartie").show();
 }
 
-function gereTaillePolice(){
+function showAlert(str){
+    $("#exampleModalLongTitle").html(str);
+    $("#exampleModalCenter").modal('toggle');
+}
 
+function showSpinner(){
+    $("#spinner").show();
+    $("#spinner").css("display","inline-flex");
 }
 
 function onFileSelected(event,imageId){
@@ -28,12 +34,17 @@ function onFileSelected(event,imageId){
     reader.readAsDataURL(selectedFile);
 }
 
+$(document).on("click", "#btn_alert", function(){
+    $("#exampleModalCenter").modal('hide');
+});
+
 $(document).on("click", ".left_arrow", function(){
     $(this).parent().hide();
     $("#accueil").show();
 });
 
+
+
 $(document).on("click", ".file-select-button", function(){
     $(this).prev().click();
-    console.log($(this));
 });
