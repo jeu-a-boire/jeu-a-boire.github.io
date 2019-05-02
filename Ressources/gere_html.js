@@ -8,6 +8,10 @@ function rejoindrePartieMenu(){
     $("#rejoindreUnePartie").show();
 }
 
+function gereTaillePolice(){
+
+}
+
 function onFileSelected(event,imageId){
 
     var selectedFile = event.target.files[0];
