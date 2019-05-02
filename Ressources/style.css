@@ -24,12 +24,12 @@ html, body {
 
 #rejoindreUnePartie{
     display: none;
-    margin:30%;
+    margin:10%;
 }
 
 #creerUnePartie{
     display: none;
-    margin:30%;
+    margin:10%;
 }
 
 #game_info{
