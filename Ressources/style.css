@@ -18,18 +18,20 @@ html, body {
 
 #accueil{
     margin:10%;
-    width: 80%;
     display:block;
+    width: 80%;
 }
 
 #rejoindreUnePartie{
     display: none;
+    width: 80%;
     margin:10%;
 }
 
 #creerUnePartie{
     display: none;
     margin:10%;
+    width: 80%;
 }
 
 #game_info{
