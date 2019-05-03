@@ -28,12 +28,18 @@
 
 .sidenav .closebtn {
     position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 4vw;
-    height: 30%;
+    top: 2%;
+    right: 2%;
+    height: 10%;
     margin-left: 50px;
+    color: #FFF;
 }
+
+.sidenav .closebtn:hover {
+    cursor: pointer;
+}
+
+
 
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
