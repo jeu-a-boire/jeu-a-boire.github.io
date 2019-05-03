@@ -6,6 +6,7 @@
 </head>
 
 <link rel="stylesheet" href="Ressources/style.css">
+<link rel="stylesheet" href="Ressources/sidenav.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -78,9 +79,18 @@
 
         <div id="contenu"></div>
 
+        <span style="position: absolute;width: 8%;top:3%;left:3%;cursor:pointer" onclick="openNav()">&#9776;</span>
+
 
     </div>
 
+</div>
+
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#" onclick="signalerUnProbleme()">Signaler un problème</a>
+    <a href="#" onclick="proposerUnJeu()">Proposer un jeu</a>
+    <a href="#" onclick="quitterLaPartie()">Quitter la partie</a>
 </div>
 
 <div id="spinner">
@@ -89,6 +99,12 @@
         <span class="sr-only">Loading...</span>
     </div>
 
+</div>
+
+<div id="proposer" style="display: none">
+    <img alt="left arrow" class="left_arrow_side_bar" src="Ressources/img/left_arrow.png">
+    <textarea id="textarea_proposer" style="margin-left: 10%;width: 80%;margin-top :15%"></textarea>
+    <button type="button" id="btn_envoyer_proposition" class="btn btn-dark" onclick="envoyerProposition()">Envoyer</button>
 </div>
 
 
@@ -102,6 +118,8 @@
         </div>
     </div>
 </div>
+
+<canvas id="canvas"></canvas>
 
 
 </body>

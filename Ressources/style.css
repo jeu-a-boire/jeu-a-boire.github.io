@@ -85,6 +85,17 @@ html, body {
     width: 8%;
     top:3%;
     left:3%;
+    cursor: pointer;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+.left_arrow_side_bar{
+    position: absolute;
+    width: 8%;
+    top:3%;
+    left:3%;
+    cursor: pointer;
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
 }
@@ -96,6 +107,7 @@ html, body {
 .card{
     margin: 20px;
     horiz-align: center;
+    overflow: hidden;
 }
 
 #contenu{
@@ -106,6 +118,7 @@ html, body {
     max-height: 15%;
     max-width: 15%;
     display: inline;
+
 }
 
 .img_rotate_menu{
@@ -113,8 +126,6 @@ html, body {
     max-width: 10%;
     display: inline;
 }
-
-
 
 .file-select-button {
    color: #00b1ca;
