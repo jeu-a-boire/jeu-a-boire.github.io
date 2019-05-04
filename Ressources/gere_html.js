@@ -32,6 +32,8 @@ function closeNav() {
 
 function onFileSelected(event,imageId){
 
+    console.log("on file selected");
+
     angle1=0;
     angle2=0;
 
@@ -42,6 +44,9 @@ function onFileSelected(event,imageId){
     imgtag.title = selectedFile.name;
 
     reader.onload = function(event) {
+
+        console.log("in");
+
         imgtag.src = event.target.result;
 
         var img_bis = $("#img_bis");
@@ -52,9 +57,10 @@ function onFileSelected(event,imageId){
 
         img_bis2.attr("src",imgtag.src);
 
+        var img = $("#"+imageId);
 
-
-        $("#"+imageId).css('transform','rotate(' + angle1 + 'deg)');
+        img.attr("currentSrc", event.target.result);
+        img.attr("src", event.target.result);
 
         rotateImage(0,imageId);
     };
@@ -132,6 +138,8 @@ function rotateImage(degree,element_name) {
 
     degree = degree%360;
 
+    console.log("rotate");
+
     var img = document.getElementById('img_bis2');
 
     switch (degree) {
@@ -161,15 +169,18 @@ function drawImage_0(img,element_name){
 
     var min;
 
-    if (c.height<c.width)
-        min=c.height;
+    if (c.height>c.width)
+        min = c.width;
+
     else
-        min=c.width;
+        min = c.height;
+
 
     tempCanvas.width = min;
     tempCanvas.height = min;
 
     tCtx.drawImage(c,0,0);
+
     var img2 = tempCanvas.toDataURL();
 
     resizeBase64Img(img2, 500, 500,element_name);
@@ -210,15 +221,18 @@ function drawImage_180(img,element_name){
 
     var min;
 
-    if (c.height<c.width)
-        min=c.height;
+    if (c.height>c.width)
+        min = c.width;
+
     else
-        min=c.width;
+        min = c.height;
+
 
     tempCanvas.width = min;
     tempCanvas.height = min;
 
     tCtx.drawImage(c,0,0);
+
     var img2 = tempCanvas.toDataURL();
 
     resizeBase64Img(img2, 500, 500,element_name);
@@ -258,15 +272,18 @@ function drawImage_90(img,element_name){
 
     var min;
 
-    if (c.height<c.width)
-        min=c.height;
+    if (c.height>c.width)
+        min = c.width;
+
     else
-        min=c.width;
+        min = c.height;
+
 
     tempCanvas.width = min;
     tempCanvas.height = min;
 
     tCtx.drawImage(c,0,0);
+
     var img2 = tempCanvas.toDataURL();
 
     resizeBase64Img(img2, 500, 500,element_name);
@@ -306,15 +323,18 @@ function drawImage_270(img,element_name){
 
     var min;
 
-    if (c.height<c.width)
-        min=c.height;
+    if (c.height>c.width)
+        min = c.width;
+
     else
-        min=c.width;
+        min = c.height;
+
 
     tempCanvas.width = min;
     tempCanvas.height = min;
 
     tCtx.drawImage(c,0,0);
+
     var img2 = tempCanvas.toDataURL();
 
     resizeBase64Img(img2, 500, 500,element_name);
