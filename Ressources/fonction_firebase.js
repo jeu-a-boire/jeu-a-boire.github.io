@@ -50,7 +50,7 @@ function showUser(){
 
         if (user.hasOwnProperty(key)) {
             $("#contenu").append("<div class=\"card\" style=\"width: 20%;display:inline-block\">\n" +
-                "<div><img class=\"card-img-top\" style=transform:rotate("+ user[key].transform + "deg) src="+ user[key].image +" alt=\"Card image\" style=\"width:100%\"></div>\n" +
+                "<div><img class=\"card-img-top\" src="+ user[key].image + " alt=\"Card image\"></div>\n" +
                 "<div class=\"card-title\">"+ user[key].username +"</div>\n" +
                 "</div>");
         }
@@ -79,7 +79,7 @@ function showUserForSupp(){
 
         if (user.hasOwnProperty(key)) {
             $("#contenu").append("<div class=\"card\" onclick='supprimerlUtilisateur("+ key +")' style=\"width: 20%;display:inline-block\">\n" +
-                "<div><img class=\"card-img-top\" style=transform:rotate("+ user[key].transform + "deg) src="+ user[key].image +" alt=\"Card image\" style=\"width:100%\"></div>\n" +
+                "<div><img class=\"card-img-top\" src="+ user[key].image + " alt=\"Card image\" style=\"width:100%\"></div>\n" +
                 "<div class=\"card-title\">"+ user[key].username +"</div>\n" +
                 "</div>");
         }
@@ -160,15 +160,9 @@ function creerUnePartie() {
         else
             image = $("#myimage_creer").data("base64");
 
-        if ($("#myimage_creer").data("transform") == undefined)
-            rotation = 0;
-        else
-            rotation = $("#myimage_creer").data("transform");
-
         firebase.database().ref('partie/'+ code +'/players/1').set({
             username: username,
-            image:image,
-            transform: rotation
+            image:image
         });
 
         player_key = 1;
@@ -234,7 +228,7 @@ function rejoindreUnePartie(){
 
             player_key = lastkey;
 
-            var image,rotation;
+            var image;
 
             if($("#myimage").data("base64") == undefined){
                 image = image_de_base;
@@ -242,15 +236,10 @@ function rejoindreUnePartie(){
             else
                 image = $("#myimage").data("base64");
 
-            if ($("#myimage").data("transform") == undefined)
-                rotation = 0;
-            else
-                rotation = $("#myimage").data("transform");
 
             firebase.database().ref('partie/' + code + '/players/' + lastkey).set({
                 username: username,
-                image: image,
-                transform:rotation
+                image: image
             });
 
 
@@ -387,8 +376,15 @@ $(document).ready(function() {
 
             $(this).attr("src", image_de_base);
             $(this).attr("currentSrc", image_de_base);
+            $("#img_bis").attr("currentSrc", image_de_base);
 
         });
+
+        $("#img_bis").attr("currentSrc", image_de_base);
+        $("#img_bis").attr("src", image_de_base);
+        $("#img_bis2").attr("currentSrc", image_de_base);
+        $("#img_bis2").attr("src", image_de_base);
+
     });
 
 });

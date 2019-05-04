@@ -32,6 +32,9 @@ function closeNav() {
 
 function onFileSelected(event,imageId){
 
+    angle1=0;
+    angle2=0;
+
     var selectedFile = event.target.files[0];
     var reader = new FileReader();
 
@@ -41,8 +44,19 @@ function onFileSelected(event,imageId){
     reader.onload = function(event) {
         imgtag.src = event.target.result;
 
-        rotateImage(imgtag,0);
-        $("#"+imageId).data("base64",$("#canvas").toDataURL());
+        var img_bis = $("#img_bis");
+
+        img_bis.attr("src",imgtag.src);
+
+        var img_bis2 = $("#img_bis2");
+
+        img_bis2.attr("src",imgtag.src);
+
+
+
+        $("#"+imageId).css('transform','rotate(' + angle1 + 'deg)');
+
+        rotateImage(0,imageId);
     };
 
     reader.readAsDataURL(selectedFile);
@@ -57,18 +71,13 @@ $(document).on("click", ".left_arrow", function(){
     $("#accueil").show();
 });
 
-$(document).on("click", "#rotate_1", function(){
-    angle1 += 90;
-    rotateImage(document.getElementById('myimage'),angle1);
-    $("#myimage").data('base64',document.getElementById('canvas').toDataURL());
-    $("#myimage").css('transform','rotate(' + angle1 + 'deg)');
+$(document).on("click", "#rotate_1", function(){angle1 += 90;
+    rotateImage(angle1,"myimage");
 });
 
 $(document).on("click", "#rotate_2", function(){
     angle2 += 90;
-    rotateImage(document.getElementById('myimage'),angle2);
-    $("#myimage_creer").data('base64',document.getElementById('canvas').toDataURL());
-    $("#myimage_creer").css('transform','rotate(' + angle2 + 'deg)');
+    rotateImage(angle2,"myimage_creer");
 });
 
 $(document).on("click", ".file-select-button", function(){
@@ -115,37 +124,219 @@ function revenirALaPartie(){
 
 }
 
-
 function quitterLaPartie() {
     document.location.reload(true);
 }
 
-function rotateImage(img,degree)
-{
+function rotateImage(degree,element_name) {
 
-    var canvas = document.getElementById('canvas');
+    degree = degree%360;
 
-    if(document.getElementById('canvas')){
+    var img = document.getElementById('img_bis2');
 
-        var context = canvas.getContext("2d");
-
-        context.clearRect(0,0,canvas.width,canvas.height);
-
-        context.save();
-
-        // move to the center of the canvas
-        context.translate(img.width/2,img.height/2);
-
-        // rotate the canvas to the specified degrees
-        context.rotate(degree*Math.PI/180);
-
-        // draw the image
-        // since the context is rotated, the image will be rotated also
-        context.drawImage(img,-img.width/2,-img.width/2);
-
-        // we’re done with the rotating so restore the unrotated context
-        context.restore();
+    switch (degree) {
+        case 0:drawImage_0(img,element_name);
+            break;
+        case 90:drawImage_90(img,element_name);
+            break;
+        case 180:drawImage_180(img,element_name);
+            break;
+        case 270:drawImage_270(img,element_name);
+            break;
 
     }
 
+}
+
+function drawImage_0(img,element_name){
+    var c = document.getElementById("canvas");
+    var ctx = c.getContext("2d");
+
+    c.height = document.getElementById('img_bis').height;
+    c.width = document.getElementById('img_bis').width;
+    ctx.drawImage(img, 0, 0);
+
+    var tempCanvas = document.createElement("canvas"),
+        tCtx = tempCanvas.getContext("2d");
+
+    var min;
+
+    if (c.height<c.width)
+        min=c.height;
+    else
+        min=c.width;
+
+    tempCanvas.width = min;
+    tempCanvas.height = min;
+
+    tCtx.drawImage(c,0,0);
+    var img2 = tempCanvas.toDataURL();
+
+    resizeBase64Img(img2, 500, 500,element_name);
+
+
+}
+
+function drawImage_180(img,element_name){
+
+    var c = document.getElementById("canvas");
+    var ctx = c.getContext("2d");
+
+    c.height = document.getElementById('img_bis').height;
+    c.width = document.getElementById('img_bis').width;
+
+
+    ctx.clearRect(0,0,c.width,c.height);
+
+    // save the unrotated context of the canvas so we can restore it later
+    // the alternative is to untranslate & unrotate after drawing
+    ctx.save();
+
+    // move to the center of the canvas
+    ctx.translate(c.width/2,c.height/2);
+
+    // rotate the canvas to the specified degrees
+    ctx.rotate(Math.PI);
+
+    // draw the image
+    // since the context is rotated, the image will be rotated also
+    ctx.drawImage(img,-c.width/2,-c.width/2);
+
+    // we’re done with the rotating so restore the unrotated context
+    ctx.restore();
+
+    var tempCanvas = document.createElement("canvas"),
+        tCtx = tempCanvas.getContext("2d");
+
+    var min;
+
+    if (c.height<c.width)
+        min=c.height;
+    else
+        min=c.width;
+
+    tempCanvas.width = min;
+    tempCanvas.height = min;
+
+    tCtx.drawImage(c,0,0);
+    var img2 = tempCanvas.toDataURL();
+
+    resizeBase64Img(img2, 500, 500,element_name);
+
+}
+
+function drawImage_90(img,element_name){
+
+    var c = document.getElementById("canvas");
+    var ctx = c.getContext("2d");
+
+    c.height = document.getElementById('img_bis').width;
+    c.width = document.getElementById('img_bis').height;
+
+
+    ctx.clearRect(0,0,c.width,c.height);
+
+    // save the unrotated context of the canvas so we can restore it later
+    // the alternative is to untranslate & unrotate after drawing
+    ctx.save();
+
+    // move to the center of the canvas
+    ctx.translate(c.width/2,c.height/2);
+
+    // rotate the canvas to the specified degrees
+    ctx.rotate(Math.PI/2);
+
+    // draw the image
+    // since the context is rotated, the image will be rotated also
+    ctx.drawImage(img,-c.width/2,-c.width/2);
+
+    // we’re done with the rotating so restore the unrotated context
+    ctx.restore();
+
+    var tempCanvas = document.createElement("canvas"),
+        tCtx = tempCanvas.getContext("2d");
+
+    var min;
+
+    if (c.height<c.width)
+        min=c.height;
+    else
+        min=c.width;
+
+    tempCanvas.width = min;
+    tempCanvas.height = min;
+
+    tCtx.drawImage(c,0,0);
+    var img2 = tempCanvas.toDataURL();
+
+    resizeBase64Img(img2, 500, 500,element_name);
+
+}
+
+function drawImage_270(img,element_name){
+
+    var c = document.getElementById("canvas");
+    var ctx = c.getContext("2d");
+
+    c.height = document.getElementById('img_bis').width;
+    c.width = document.getElementById('img_bis').height;
+
+
+    ctx.clearRect(0,0,c.width,c.height);
+
+    // save the unrotated context of the canvas so we can restore it later
+    // the alternative is to untranslate & unrotate after drawing
+    ctx.save();
+
+    // move to the center of the canvas
+    ctx.translate(c.width/2,c.height/2);
+
+    // rotate the canvas to the specified degrees
+    ctx.rotate(-Math.PI/2);
+
+    // draw the image
+    // since the context is rotated, the image will be rotated also
+    ctx.drawImage(img,-c.width/2,-c.width/2);
+
+    // we’re done with the rotating so restore the unrotated context
+    ctx.restore();
+
+    var tempCanvas = document.createElement("canvas"),
+        tCtx = tempCanvas.getContext("2d");
+
+    var min;
+
+    if (c.height<c.width)
+        min=c.height;
+    else
+        min=c.width;
+
+    tempCanvas.width = min;
+    tempCanvas.height = min;
+
+    tCtx.drawImage(c,0,0);
+    var img2 = tempCanvas.toDataURL();
+
+    resizeBase64Img(img2, 500, 500,element_name);
+}
+
+function resizeBase64Img(base64, width, height,element_name) {
+    var canvas = document.getElementById("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    var context = canvas.getContext("2d");
+    $("<img/>").attr("src",base64).on('load',function() {
+        context.scale(width/this.width,  height/this.height);
+        context.drawImage(this, 0, 0);
+        $("#"+element_name).data('base64',canvas.toDataURL());
+        gere_image_little(canvas.toDataURL(),element_name);
+    });
+}
+
+function gere_image_little(base64,element_name){
+
+    var img = $("#"+element_name);
+
+    img.attr("currentSrc", base64);
+    img.attr("src", base64);
 }

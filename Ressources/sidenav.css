@@ -19,7 +19,6 @@
     color: #818181;
     display: block;
     transition: 0.3s;
-
 }
 
 .sidenav a:hover{
@@ -38,8 +37,6 @@
 .sidenav .closebtn:hover {
     cursor: pointer;
 }
-
-
 
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
