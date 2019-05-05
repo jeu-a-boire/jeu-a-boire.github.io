@@ -1,0 +1,50 @@
+.glowing{
+    cursor: pointer;
+    background: #262626;
+    border:4px solid #3aff21;
+    text-align: center;
+    line-height: 90px; /*same as height*/
+    border-radius:90px; /*same as height*/
+    font-family: verdana;
+    opacity: 0.4;
+    color: #3aff21;
+    text-shadow: 0 0 5px #3aff21;
+    box-shadow: 0 0 5px #3aff21;
+
+}
+
+
+
+.glowing-glowing-blue {
+    cursor: pointer;
+    color:#00fff5;
+    border:4px solid #00fff5;
+    text-shadow: 0 0 5px #00fff5;
+    box-shadow: 0 0 5px #00fff5;
+    background: #262626;
+    opacity: 1;
+    text-align: center;
+    line-height: 90px; /*same as height*/
+    border-radius:90px; /*same as height*/
+    font-family: verdana;
+}
+
+.glowing-glowing-green {
+    cursor: pointer;
+    color: #3aff21;
+    border:4px solid #3aff21;
+    text-shadow: 0 0 5px #3aff21;
+    box-shadow: 0 0 5px #3aff21;
+    background: #262626;
+    text-align: center;
+    line-height: 90px; /*same as height*/
+    border-radius:90px; /*same as height*/
+    font-family: verdana;
+}
+
+#btn_glowing_play{
+    width: 20%;
+    position: fixed;
+    right: 5%;
+    bottom: 5%;
+}

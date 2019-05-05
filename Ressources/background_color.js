@@ -121,15 +121,13 @@ function change() {
                 phase=1;
 
             break;
-
-
-
     }
 
-    setTimeout(function() {
-        change();
-    }, 20);
-
+    //if (state == "Pas de partie" || state == "menu_avant_partie")
+        setTimeout(function() {change();}, 20);
+    /*else{
+        $("body").css("background-color", '#262626');
+    }*/
 }
 
 $(document).ready(function(){

@@ -1,10 +1,27 @@
-@import url('https://fonts.googleapis.com/css?family=Bowlby+One+SC');
+@font-face {
+    font-family: GraublauWeb;
+    src: url("/Ressources/img/made_coachella/MADE Coachella Black PERSONAL USE.otf") format("opentype");
+}
+
+@font-face {
+    font-family: GraublauWeb;
+    font-weight: bold;
+    src: url("/Ressources/img/made_coachella/MADE Coachella Bold PERSONAL USE.otf") format("opentype");
+}
+
+@font-face {
+    font-family: GraublauWeb;
+    font-weight: normal;
+    src: url("/Ressources/img/made_coachella/MADE Coachella Regular PERSONAL USE.otf") format("opentype");
+}
+
+
 
 html, body {
     height: 100%;
     margin: 0;
     font-size: 4vw;
-    font-family: 'Bowlby One SC', cursive;
+    font-family: GraublauWeb,cursive;
 }
 
 #code{
@@ -43,6 +60,12 @@ html, body {
 }
 
 #creerUnePartie{
+    display: none;
+    margin:10%;
+    width: 80%;
+}
+
+#menuChoisirMode{
     display: none;
     margin:10%;
     width: 80%;
@@ -158,3 +181,8 @@ html, body {
 #btn_alert{
     font-size: 20px;
 }
+
+#btn_mode{
+    display: block;
+}
+

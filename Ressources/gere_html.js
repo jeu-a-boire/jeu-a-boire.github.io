@@ -1,6 +1,6 @@
 var angle1 = 0;
 var angle2 = 0;
-
+var nb_modes = 1;
 
 function creerPartieMenu(){
     $("#accueil").hide();
@@ -22,50 +22,78 @@ function showSpinner(){
     $("#spinner").css("display","inline-flex");
 }
 
+/** montre le choix des modes **/
+function lancerLaPartie(){
+    state = "choisir_mode";
+
+    if (superUser) {
+        firebase.database().ref('partie/' + code + '/status/').set(state);
+    }
+
+    mettreTousLesMenuAFalse();
+    menu_choisir_mode = true;
+    $("#game_info").hide();
+    var coderef = $("#code");
+    var btn_nav = $("#btn_nav");
+    if (superUser)
+        coderef.html("Selectionner les modes de la partie : ");
+    else
+        coderef.html("Selection des modes en cours...");
+
+    coderef.css("text-shadow","0 0 5px #00fff5");
+    btn_nav.css("text-shadow","0 0 5px #00fff5");
+    coderef.css("color","#00fff5");
+    btn_nav.css("color","#00fff5");
+    $("#menuChoisirMode").show();
+
+    if (superUser) {
+        $("#btn_glowing_play").show();
+
+        firebase.database().ref('partie/'+ code +'/modes/').set({
+            "Commun":true,
+            "Conseil des gorgées":false,
+            "Devine tête":false,
+            "Pour combien":false
+        });
+
+    }
+    else{
+        reagisEnFonctionDesModesActifs();
+    }
+}
+
+function play(){
+
+    if (nb_modes>0) {
+
+        state = "in_game";
+        metAJourStatut();
+
+
+        if (superUser) {
+            donneLesModesChoisis(true);
+            reagisAuModeActuel();
+        }
+        else{
+            reagisAuModeActuel();
+        }
+
+
+        $("#code").hide();
+        $("#menuChoisirMode").hide();
+
+    }
+    else{
+        showAlert("Vous devez choisir au moins un mode!");
+    }
+}
+
 function openNav() {
     document.getElementById("mySidenav").style.width = "100%";
 }
 
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
-}
-
-function onFileSelected(event,imageId){
-
-    console.log("on file selected");
-
-    angle1=0;
-    angle2=0;
-
-    var selectedFile = event.target.files[0];
-    var reader = new FileReader();
-
-    var imgtag = document.getElementById(imageId);
-    imgtag.title = selectedFile.name;
-
-    reader.onload = function(event) {
-
-        console.log("in");
-
-        imgtag.src = event.target.result;
-
-        var img_bis = $("#img_bis");
-
-        img_bis.attr("src",imgtag.src);
-
-        var img_bis2 = $("#img_bis2");
-
-        img_bis2.attr("src",imgtag.src);
-
-        var img = $("#"+imageId);
-
-        img.attr("currentSrc", event.target.result);
-        img.attr("src", event.target.result);
-
-        rotateImage(0,imageId);
-    };
-
-    reader.readAsDataURL(selectedFile);
 }
 
 $(document).on("click", "#btn_alert", function(){
@@ -77,26 +105,11 @@ $(document).on("click", ".left_arrow", function(){
     $("#accueil").show();
 });
 
-$(document).on("click", "#rotate_1", function(){angle1 += 90;
-    rotateImage(angle1,"myimage");
-});
-
-$(document).on("click", "#rotate_2", function(){
-    angle2 += 90;
-    rotateImage(angle2,"myimage_creer");
-});
-
-$(document).on("click", ".file-select-button", function(){
-    $(this).prev().click();
-});
-
 $(document).on("click", ".left_arrow_side_bar", function(){
     $("#body").show();
     $("#proposer").hide();
     trouverLeBonBooleenMenuEnFonctionDeState();
 });
-
-
 
 function signalerUnProbleme(){
     mettreTousLesMenuAFalse();
@@ -134,210 +147,164 @@ function quitterLaPartie() {
     document.location.reload(true);
 }
 
-function rotateImage(degree,element_name) {
+/*************************              Gère l'activation des modes                ******************************/
 
-    degree = degree%360;
+function glowing(contexte,color){
 
-    console.log("rotate");
+    if (superUser) {
 
-    var img = document.getElementById('img_bis2');
+        var className = $('#' + contexte.id).attr('class');
 
-    switch (degree) {
-        case 0:drawImage_0(img,element_name);
-            break;
-        case 90:drawImage_90(img,element_name);
-            break;
-        case 180:drawImage_180(img,element_name);
-            break;
-        case 270:drawImage_270(img,element_name);
-            break;
+        if (className.includes('glowing-glowing-' + color)) {
+            className = 'glowing';
+
+            nb_modes--;
+
+            firebase.database().ref('partie/'+ code +'/modes/'+$('#' + contexte.id).html()).set(false);
+
+        } else {
+            className = ' glowing-glowing-' + color;
+
+            nb_modes++;
+
+            firebase.database().ref('partie/'+ code +'/modes/'+$('#' + contexte.id).html()).set(true);
+        }
+
+        $('#' + contexte.id).attr('class', className);
 
     }
 
-}
-
-function drawImage_0(img,element_name){
-    var c = document.getElementById("canvas");
-    var ctx = c.getContext("2d");
-
-    c.height = document.getElementById('img_bis').height;
-    c.width = document.getElementById('img_bis').width;
-    ctx.drawImage(img, 0, 0);
-
-    var tempCanvas = document.createElement("canvas"),
-        tCtx = tempCanvas.getContext("2d");
-
-    var min;
-
-    if (c.height>c.width)
-        min = c.width;
-
-    else
-        min = c.height;
-
-
-    tempCanvas.width = min;
-    tempCanvas.height = min;
-
-    tCtx.drawImage(c,0,0);
-
-    var img2 = tempCanvas.toDataURL();
-
-    resizeBase64Img(img2, 500, 500,element_name);
-
+    donneLesModesChoisis(false);
 
 }
 
-function drawImage_180(img,element_name){
+function glowing_without_database(contexte,color,glow){
 
-    var c = document.getElementById("canvas");
-    var ctx = c.getContext("2d");
+    var className = $('#' + contexte.id).attr('class');
 
-    c.height = document.getElementById('img_bis').height;
-    c.width = document.getElementById('img_bis').width;
+    if (!glow) {
+        className = 'glowing';
+    } else {
+        className = ' glowing-glowing-' + color;
+    }
 
-
-    ctx.clearRect(0,0,c.width,c.height);
-
-    // save the unrotated context of the canvas so we can restore it later
-    // the alternative is to untranslate & unrotate after drawing
-    ctx.save();
-
-    // move to the center of the canvas
-    ctx.translate(c.width/2,c.height/2);
-
-    // rotate the canvas to the specified degrees
-    ctx.rotate(Math.PI);
-
-    // draw the image
-    // since the context is rotated, the image will be rotated also
-    ctx.drawImage(img,-c.width/2,-c.width/2);
-
-    // we’re done with the rotating so restore the unrotated context
-    ctx.restore();
-
-    var tempCanvas = document.createElement("canvas"),
-        tCtx = tempCanvas.getContext("2d");
-
-    var min;
-
-    if (c.height>c.width)
-        min = c.width;
-
-    else
-        min = c.height;
-
-
-    tempCanvas.width = min;
-    tempCanvas.height = min;
-
-    tCtx.drawImage(c,0,0);
-
-    var img2 = tempCanvas.toDataURL();
-
-    resizeBase64Img(img2, 500, 500,element_name);
+    $('#' + contexte.id).attr('class', className);
 
 }
 
-function drawImage_90(img,element_name){
 
-    var c = document.getElementById("canvas");
-    var ctx = c.getContext("2d");
+/********************************       Images        ****************************/
 
-    c.height = document.getElementById('img_bis').width;
-    c.width = document.getElementById('img_bis').height;
+function onFileSelected(event,imageId){
 
+    $("#body").hide();
+    showSpinner();
 
-    ctx.clearRect(0,0,c.width,c.height);
+    console.log("on file selected");
 
-    // save the unrotated context of the canvas so we can restore it later
-    // the alternative is to untranslate & unrotate after drawing
-    ctx.save();
+    angle1=0;
+    angle2=0;
 
-    // move to the center of the canvas
-    ctx.translate(c.width/2,c.height/2);
+    var selectedFile = event.target.files[0];
+    var reader = new FileReader();
 
-    // rotate the canvas to the specified degrees
-    ctx.rotate(Math.PI/2);
+    var imgtag = document.getElementById(imageId);
+    imgtag.title = selectedFile.name;
+    document.getElementById('img_bis').title = selectedFile.name;
+    document.getElementById('img_bis2').title = selectedFile.name;
 
-    // draw the image
-    // since the context is rotated, the image will be rotated also
-    ctx.drawImage(img,-c.width/2,-c.width/2);
+    reader.onload = function(event) {
 
-    // we’re done with the rotating so restore the unrotated context
-    ctx.restore();
+        console.log("in");
 
-    var tempCanvas = document.createElement("canvas"),
-        tCtx = tempCanvas.getContext("2d");
+        imgtag.src = event.target.result;
 
-    var min;
+        var img_bis = $("#img_bis");
 
-    if (c.height>c.width)
-        min = c.width;
+        img_bis.attr("src",imgtag.src);
 
-    else
-        min = c.height;
+        var img_bis2 = $("#img_bis2");
 
+        img_bis2.attr("src",imgtag.src);
 
-    tempCanvas.width = min;
-    tempCanvas.height = min;
+        var img = $("#"+imageId);
 
-    tCtx.drawImage(c,0,0);
+        img.attr("currentSrc", event.target.result);
+        img.attr("src", event.target.result);
 
-    var img2 = tempCanvas.toDataURL();
+        //rotateImage2(0,imageId);
 
-    resizeBase64Img(img2, 500, 500,element_name);
+        setTimeout(function() {
+            rotateImage2(0, imageId);
+        },500);
+    };
 
+    reader.readAsDataURL(selectedFile);
 }
 
-function drawImage_270(img,element_name){
+$(document).on("click", "#rotate_1", function(){
+    angle1 += 90;
+    showSpinner();
+    $("#body").hide();
+    rotateImage2(angle1,"myimage");
+});
 
-    var c = document.getElementById("canvas");
-    var ctx = c.getContext("2d");
+$(document).on("click", "#rotate_2", function(){
+    angle2 += 90;
+    showSpinner();
+    $("#body").hide();
+    rotateImage2(angle2,"myimage_creer");
+});
 
-    c.height = document.getElementById('img_bis').width;
-    c.width = document.getElementById('img_bis').height;
+$(document).on("click", ".file-select-button", function(){
+    $(this).prev().click();
+});
 
+function rotateImage2(degrees,element_name){
 
-    ctx.clearRect(0,0,c.width,c.height);
+    var canvas = document.getElementById("canvas");
+    var image = document.getElementById('img_bis2');
 
-    // save the unrotated context of the canvas so we can restore it later
-    // the alternative is to untranslate & unrotate after drawing
-    ctx.save();
+    var widthFactor,heightFactor;
 
-    // move to the center of the canvas
-    ctx.translate(c.width/2,c.height/2);
+    var ctx=canvas.getContext("2d");
+    canvas.style.width="20%";
 
-    // rotate the canvas to the specified degrees
-    ctx.rotate(-Math.PI/2);
+    if(degrees == 90 || degrees == 270) {
+        canvas.width = image.height;
+        canvas.height = image.width;
+        if (canvas.height>canvas.width){
+            widthFactor = 1;
+            heightFactor = canvas.height/canvas.width;
+        }
+        else{
+            heightFactor = 1;
+            widthFactor = canvas.height/canvas.width;
+        }
+    } else {
+        canvas.width = image.width;
+        canvas.height = image.height;
+        if (canvas.height<canvas.width){
+            widthFactor = 1;
+            heightFactor = canvas.height/canvas.width;
+        }
+        else{
+            heightFactor = 1;
+            widthFactor = canvas.height/canvas.width;
+        }
+    }
 
-    // draw the image
-    // since the context is rotated, the image will be rotated also
-    ctx.drawImage(img,-c.width/2,-c.width/2);
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    if(degrees == 90 || degrees == 270) {
+        ctx.translate(image.height/2,image.width/2);
+    } else {
+        ctx.translate(image.width/2,image.height/2);
+    }
+    ctx.rotate(degrees*Math.PI/180);
+    ctx.drawImage(image,-image.width/2,-image.height/2);
 
-    // we’re done with the rotating so restore the unrotated context
-    ctx.restore();
+    resizeBase64Img(canvas.toDataURL(), 500*widthFactor, 500*heightFactor,element_name);
 
-    var tempCanvas = document.createElement("canvas"),
-        tCtx = tempCanvas.getContext("2d");
-
-    var min;
-
-    if (c.height>c.width)
-        min = c.width;
-
-    else
-        min = c.height;
-
-
-    tempCanvas.width = min;
-    tempCanvas.height = min;
-
-    tCtx.drawImage(c,0,0);
-
-    var img2 = tempCanvas.toDataURL();
-
-    resizeBase64Img(img2, 500, 500,element_name);
 }
 
 function resizeBase64Img(base64, width, height,element_name) {
@@ -359,4 +326,7 @@ function gere_image_little(base64,element_name){
 
     img.attr("currentSrc", base64);
     img.attr("src", base64);
+
+    $("#spinner").hide();
+    $("#body").show();
 }

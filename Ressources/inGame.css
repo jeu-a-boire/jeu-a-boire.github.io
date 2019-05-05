@@ -1,0 +1,27 @@
+#pour_combien{
+    display: none;
+}
+
+#pour_combien_phrase{
+    text-align: center;
+}
+
+#reponse_pour_combien{
+    display: none;
+}
+
+#pour_combien_page2{
+    display: none;
+}
+
+#conseil_des_gorgees{
+    display: none;
+}
+
+#reponse_conseil_gorgees {
+    display: none;
+}
+
+#btn_suivant_reponse_conseil_gorgees{
+    display: none;
+}

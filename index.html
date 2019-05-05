@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="font-family: GraublauWeb;">
 <head>
     <meta charset="UTF-8">
     <title>Shot Up</title>
@@ -7,6 +7,8 @@
 
 <link rel="stylesheet" href="Ressources/style.css">
 <link rel="stylesheet" href="Ressources/sidenav.css">
+<link rel="stylesheet" href="Ressources/glowing.css">
+<link rel="stylesheet" href="Ressources/inGame.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -25,8 +27,9 @@
 <script src="Ressources/background_color.js" ></script>
 <script src="Ressources/gere_html.js" ></script>
 <script src="Ressources/utils.js" ></script>
+<script src="Ressources/inGame.js" ></script>
 
-<body>
+<body style="font-family: GraublauWeb;">
 
 <div id="body">
 
@@ -75,12 +78,74 @@
 
     <div id="game_info">
 
-        <button type="button" id="btnLancerPartie" style="display: none" class="btn btn-dark" onclick="">Lancer la partie</button>
+        <button type="button" id="btnLancerPartie" style="display: none" class="btn btn-dark" onclick="lancerLaPartie()">Lancer la partie</button>
 
         <div id="contenu"></div>
 
         <span style="position: absolute;width: 8%;top:3%;left:3%;cursor:pointer" onclick="openNav()">&#9776;</span>
 
+    </div>
+
+    <div id="menuChoisirMode">
+
+        <span id="btn_nav" style="position: absolute;width: 8%;top:3%;left:3%;cursor:pointer" onclick="openNav()">&#9776;</span>
+
+
+        <span class="glowing-glowing-blue" id="btn_glowing_play" style="display:none;" onclick="play()">&#10140;</span>
+        <span class="glowing-glowing-green" id="btn_glowing_1" style="display:block;width: 80%;margin: 5% 10%" onclick="glowing(this,'green')">Commun</span>
+        <span class="glowing" id="btn_glowing_2" style="display:block;width: 80%;margin: 5% 10%" onclick="glowing(this,'green')">Conseil des gorgées</span>
+        <span class="glowing" id="btn_glowing_3" style="display:block;width: 80%;margin: 5% 10%" onclick="glowing(this,'green')">Devine tête</span>
+        <span class="glowing" id="btn_glowing_4" style="display:block;width: 80%;margin: 5% 10%" onclick="glowing(this,'green')">Pour combien</span>
+        <!--<span class="glowing" id="btn_glowing_5" style="display:block;width: 80%;margin: 5% 10%" onclick="glowing(this,'green')">Jeu de Vianney</span>-->
+        <!-- Dilemme -->
+
+    </div>
+
+    <div id="NormalMode">
+
+    </div>
+
+    <div id="conseil_des_gorgees">
+        <h3 style="width: 100%;text-align: center;">Conseil des gorgées</h3>
+        <div style="width: 100%;text-align: center;" id="conseil_gorgees_phrase"></div>
+        <div id="conseil_gorgees_personnage_affichage"></div>
+
+    </div>
+
+    <div id="reponse_conseil_gorgees">
+
+        <h3 style="width: 100%;text-align: center;" id="txt_reponse_conseil_gorgees">La personne choisie pour l'instant est :</h3>
+        <div id="contenu_reponse_conseil_gorgees"></div>
+        <span class="glowing-glowing-blue" id="btn_suivant_reponse_conseil_gorgees" style="width: 20%;position: fixed;right: 5%;bottom: 5%;" onclick="clear_conseil_gorgees()">&#10140;</span>
+    </div>
+
+    <div id="devine_tete">
+
+    </div>
+
+    <div id="pour_combien" style="margin: 10%;width: 80%">
+        <h6 style="width: 100%;text-align: center;">Pour combien?</h6>
+        <div id="pour_combien_phrase"></div>
+        <input id="pour_combien_input" class="input_txt" type="number" placeholder="1000000€"/>
+        <button type="button" id="btn_envoyer_pour_combien" class="btn btn-dark" onclick="sendPourCombien()">OK</button>
+
+    </div>
+
+    <div id="reponse_pour_combien">
+        <div id="pour_combien_page1">
+            <h3 style='width: 100%;text-align: center'>Les joueurs ont joués :</h3>
+            <div id="reponse_pour_combien_contenu"></div>
+            <h4 style='width: 100%;text-align: center'>La réponse était : </h4>
+            <div id="reponse_pour_combien_reponse"></div>
+            <span class="glowing-glowing-blue" id="btn_suivant_reponse_pour_combien" style="width: 20%;position: fixed;right: 5%;bottom: 5%;" onclick="showDeuxiemePage();">&#10140;</span>
+        </div>
+        <div id="pour_combien_page2" style="margin-bottom: 25%">
+            <h3 style='width: 100%;text-align: center'>Cette personne boit 2 gorgées :</h3>
+            <div id="pour_combien_tu_bois"></div>
+            <h4 style='width: 100%;text-align: center'>Cette personne distribue 2 gorgées :</h4>
+            <div id="pour_combien_tu_distribue"></div>
+            <span class="glowing-glowing-blue" id="btn_retour_reponse_pour_combien" style="width: 20%;position: fixed;transform: rotate(180deg);left: 5%;bottom: 5%;" onclick="showPremierePage();">&#10140;</span>
+        </div>
 
     </div>
 
