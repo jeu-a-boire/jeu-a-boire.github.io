@@ -24,6 +24,7 @@ function showSpinner(){
 
 /** montre le choix des modes **/
 function lancerLaPartie(){
+
     state = "choisir_mode";
 
     if (superUser) {
@@ -49,13 +50,27 @@ function lancerLaPartie(){
     if (superUser) {
         $("#btn_glowing_play").show();
 
-        firebase.database().ref('partie/'+ code +'/modes/').set({
+        modes = {
             "Commun":true,
             "Conseil des gorgées":false,
             "Devine tête":false,
             "Pour combien":false
-        });
+        };
 
+        firebase.database().ref('partie/'+ code +'/modes/').set(modes);
+
+        var list = document.getElementById('menuChoisirMode').children;
+
+        for(var i=0;i<list.length;i++){
+            for(var key in modes) {
+                if (list[i].innerHTML == key && modes[key] == true) {
+                    glowing_without_database(list[i],'green',true);
+                }
+                else if (list[i].innerHTML == key && modes[key] == false){
+                    glowing_without_database(list[i],'green',false);
+                }
+            }
+        }
     }
     else{
         reagisEnFonctionDesModesActifs();
@@ -73,6 +88,7 @@ function play(){
         if (superUser) {
             donneLesModesChoisis(true);
             reagisAuModeActuel();
+            $("#btn_nav_in_game").show();
         }
         else{
             reagisAuModeActuel();
@@ -81,6 +97,7 @@ function play(){
 
         $("#code").hide();
         $("#menuChoisirMode").hide();
+        $("#gameDiv").show();
 
     }
     else{
@@ -94,6 +111,44 @@ function openNav() {
 
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
+}
+
+function openInGameNav() {
+    document.getElementById("mySidenavInGame").style.width = "100%";
+}
+
+function closeInGameNav() {
+    document.getElementById("mySidenavInGame").style.width = "0";
+}
+
+function revenirAuMenuPrincipal(){
+
+    console.log("revenirAuMenuPrincipal");
+
+    hideAllModes();
+    if (superUser) {
+        state = "menu_avant_partie";
+        metAJourStatut();
+        closeInGameNav();
+
+        //todo: a chaque ajout de mode clear in db les traces
+        firebase.database().ref('partie/' + code + '/conseil_gorgees/').remove();
+        firebase.database().ref('partie/' + code + '/game/').remove();
+        firebase.database().ref('partie/' + code + '/modes/').remove();
+        firebase.database().ref('partie/' + code + '/pour_combien/').remove();
+
+    }else{
+        showAlert("Le meneur de jeu a choisi de revenir au menu principal");
+    }
+    mettreTousLesMenuAFalse();
+    trouverLeBonBooleenMenuEnFonctionDeState();
+    $("#gameDiv").hide();
+    $("#spinner").show();
+    showUser();
+    $("#spinner").hide();
+    $("#code").html("Code de la partie : " + code).show();
+    $("#game_info").show();
+    $("#code").show();
 }
 
 $(document).on("click", "#btn_alert", function(){
@@ -147,6 +202,17 @@ function quitterLaPartie() {
     document.location.reload(true);
 }
 
+
+
+
+
+
+
+
+
+
+
+
 /*************************              Gère l'activation des modes                ******************************/
 
 function glowing(contexte,color){
@@ -191,6 +257,13 @@ function glowing_without_database(contexte,color,glow){
     $('#' + contexte.id).attr('class', className);
 
 }
+
+
+
+
+
+
+
 
 
 /********************************       Images        ****************************/

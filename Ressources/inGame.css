@@ -25,3 +25,27 @@
 #btn_suivant_reponse_conseil_gorgees{
     display: none;
 }
+
+#reponse_pour_combien_contenu{
+    display:flex;justify-content:center;align-items:center;
+}
+
+#reponse_pour_combien_reponse{
+    display:flex;justify-content:center;align-items:center;
+}
+
+#pour_combien_tu_bois{
+    display:flex;justify-content:center;align-items:center;
+}
+
+#pour_combien_tu_distribue{
+    display:flex;justify-content:center;align-items:center;
+}
+
+#conseil_gorgees_personnage_affichage{
+    display:flex;justify-content:center;align-items:center;
+}
+
+#contenu_reponse_conseil_gorgees{
+    display:flex;justify-content:center;align-items:center;
+}

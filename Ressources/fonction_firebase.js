@@ -1,7 +1,9 @@
 var code;
 var player_key;
+var username;
 var image_de_base;
 var superUser=false;
+var iHaveAProblemOfConnection = false;
 var players_list;
 var numberOfPlayer = 0;
 var ajout_btn_supp_utilisateur = false;
@@ -45,6 +47,7 @@ function trouverLeBonBooleenMenuEnFonctionDeState(){
 
 function metAJourStatut() {
     firebase.database().ref('partie/' + code + '/status/').set(state);
+    trouverLeBonBooleenMenuEnFonctionDeState();
 }
 
 function showUser(){
@@ -141,6 +144,8 @@ function creerUnePartie() {
         return;
     }
 
+    this.username = username;
+
     $("#body").hide();
     showSpinner();
 
@@ -223,6 +228,7 @@ function creerUnePartie() {
 
             firebase.database().ref('partie/' + code + '/status/').set("menu_avant_partie");
 
+            setDate();
 
             player_key = 1;
 
@@ -252,6 +258,8 @@ function rejoindreUnePartie(){
         showAlert("Il faut saisir un pseudo!");
         return;
     }
+
+    this.username = username;
 
     $("#body").hide();
     showSpinner();
@@ -293,7 +301,11 @@ function rejoindreUnePartie(){
                 }
             }
 
-            lastkey++;
+            lastkey = parseInt(lastkey);
+
+            lastkey += getRandomInt(1000000)+1;
+
+            console.log(lastkey);
 
             player_key = lastkey;
 
@@ -304,8 +316,6 @@ function rejoindreUnePartie(){
             }
             else
                 im = $("#myimage").data("base64");
-
-
 
             var canvas = document.getElementById('canvas');
 
@@ -350,6 +360,7 @@ function rejoindreUnePartie(){
 
                 showGameInfo();
 
+                setTimeout(checkIfMyConnectionIsNotAMistake(), 3000);
 
             };
 
@@ -357,6 +368,34 @@ function rejoindreUnePartie(){
 
     });
 
+}
+
+function setDate(){
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = dd + '/' + mm + '/' + yyyy;
+
+    firebase.database().ref('partie/' + code + '/date/').set(today);
+
+}
+
+/**
+ * Si on se connecte pile en même temps que quelqu'un, on peut avoir un pb d'identifiant pareil, cette fonction gère ce problème
+ */
+function checkIfMyConnectionIsNotAMistake(){
+    for (var key in players_list){
+        if (players_list.hasOwnProperty(key)){
+
+            if (player_key == key && players_list[key].username!=username){
+                iHaveAProblemOfConnection = true;
+                quitterLaPartie();
+            }
+
+        }
+    }
 }
 
 function envoyerProposition(){
@@ -426,6 +465,7 @@ function showGameInfo(){
     var playerRef = firebase.database().ref('partie/'+ code +'/players/');
 
     playerRef.on('value', function(snapshot) {
+
         players_list=snapshot.val();
 
         var user_is_present_in_database = false;
@@ -458,6 +498,14 @@ function showGameInfo(){
             showUser();
         else if (menu_supprimer_joueur)
             showUserForSupp();
+        else if (menu_in_game && superUser){
+            $("#btn_nav_in_game").show();
+        }
+
+        checkIfMyConnectionIsNotAMistake();
+
+
+
     });
 
     reagisEnFonctionDuStatus();
@@ -481,7 +529,14 @@ function reagisEnFonctionDuStatus(){
                 play();
             }
 
+            if (state == 'in_game' && statut == 'menu_avant_partie'){
+                revenirAuMenuPrincipal();
+            }
+
         }
+
+        state = statut;
+
     });
 
 
@@ -489,6 +544,9 @@ function reagisEnFonctionDuStatus(){
 }
 
 function reagisEnFonctionDesModesActifs(){
+
+    console.log("Réagis en fonction des modes actifs");
+
     var modesRef = firebase.database().ref('partie/'+ code +'/modes/');
 
     modesRef.on('value', function(snapshot) {
@@ -539,6 +597,7 @@ var remove = false;
 /**
  * On disconnect, on enleve le joueur de la partie dans la bdd
  */
+
 window.addEventListener('beforeunload', function (e) {
 
     if (code!=undefined && code!=null) {
@@ -546,8 +605,9 @@ window.addEventListener('beforeunload', function (e) {
         if (numberOfPlayer == 1 && !remove)
             firebase.database().ref('partie/'+ code).remove();
 
+        if (!iHaveAProblemOfConnection)
+            firebase.database().ref('partie/'+ code +'/players/' + player_key).remove();
 
-        firebase.database().ref('partie/'+ code +'/players/' + player_key).remove();
         remove=true;
 
     }

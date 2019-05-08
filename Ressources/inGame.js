@@ -5,6 +5,8 @@ var conseil_gorgees_question;
 var laPartieDuModeEnCoursEstFinis = false;
 
 function choisisUnMode(){
+    console.log("choisisUnMode");
+
 
     var i = getRandomInt(listModes.length);
 
@@ -18,6 +20,8 @@ function choisisUnMode(){
 
 //Que pour le super User
 function agisEnFonctionDuMode() {
+    console.log("agisEnFonctionDuMode");
+
 
     switch (mode_actuel) {
         case "Commun":
@@ -41,14 +45,16 @@ function agisEnFonctionDuMode() {
 }
 
 function modeCommun(){
-    console.log("mode commun");
+    console.log("modeCommun");
+
 }
 
 function modeDevineTete(){
-    console.log("mode devine tête");
+    console.log("modeDevineTete");
 }
 
 function reagisAuModeActuel(){
+    console.log("reagisAuModeActuel");
 
 
     var statusRef = firebase.database().ref('partie/'+ code +'/mode/');
@@ -64,45 +70,64 @@ function reagisAuModeActuel(){
 }
 
 function showMode(){
+    console.log("showMode");
+
 
     laPartieDuModeEnCoursEstFinis = false;
 
-    console.log("Show mode :" + mode_actuel);
+    var body = $("#body");
+    var spinner = $("#spinner");
 
     switch (mode_actuel) {
         case "Commun":
-            $("#body").show();
-            $("#spinner").hide();
+            body.show();
+            spinner.hide();
             showModeCommun();
             break;
         case 'Conseil des gorgées':
-            $("#body").show();
-            $("#spinner").hide();
+            body.show();
+            spinner.hide();
             showModeConseilGorgees();
             break;
         case 'Devine tête':
-            $("#body").show();
-            $("#spinner").hide();
+            body.show();
+            spinner.hide();
             showModeDevineTete();
             break;
         case 'Pour combien':
-            $("#body").show();
-            $("#spinner").hide();
+            body.show();
+            spinner.hide();
             showModePourCombien();
             break;
         case 'A determiner':
-            $("#body").hide();
-            $("#spinner").show();
+            body.hide();
+            spinner.show();
+            if (!superUser){
+                clear_conseil_gorgees();
+                clear_pour_combien();
+            }
             break;
     }
 }
 
+/**************** Général   ***********************/
+
+function hideAllModes(){
+    console.log("hideAllModes");
+
+    //todo: a completer avec tous les modes à chaque fois
+    hideAllConseilGorgees();
+    hideAllPourCombien();
+}
 
 /***************  Conseil des gorgées   ******************/
 
 var aVote = false;
 
 function showModeConseilGorgees() {
+
+    console.log("showModeConseilGorgees");
+
 
     aVote = false;
 
@@ -123,7 +148,7 @@ function showModeConseilGorgees() {
 
         for (var key in players_list) {
 
-            if (key != player_key) {
+            if (key != player_key && players_list.hasOwnProperty(key)) {
                 //ce n'est pas la réponse mais les autres propositions
                 $("#conseil_gorgees_personnage_affichage").append("<div class=\"card\" onclick=\"vote_conseil_gorgee("+ key +")\" style=\"width: 20%;display:inline-block\">\n" +
                     "<div><img class=\"card-img-top\" src=" + players_list[key].image + " alt=\"Card image\"></div>\n" +
@@ -141,6 +166,9 @@ function showModeConseilGorgees() {
 
 function vote_conseil_gorgee(key){
 
+    console.log("vote_conseil_gorgee");
+
+
 
 
     aVote = true;
@@ -152,17 +180,10 @@ function vote_conseil_gorgee(key){
 
     var statusRef = firebase.database().ref('partie/'+ code +'/conseil_gorgees/');
 
-    console.log("J'active la fonction qui affiche les images car j'ai voté");
-
     statusRef.on('value', function(snapshot) {
-
-        console.log("Je montre les images car j'ai voté");
-        console.log("La partie en cours est finsi: "+laPartieDuModeEnCoursEstFinis);
 
 
         if (!laPartieDuModeEnCoursEstFinis && aVote) {
-
-            console.log(7);
 
             var choix = snapshot.val();
 
@@ -181,7 +202,7 @@ function vote_conseil_gorgee(key){
             var number_of_vote = 0;
             for (key in choix) {
 
-                if (choix.hasOwnProperty(key)) {
+                if (choix.hasOwnProperty(key) && players_list.hasOwnProperty(choix[key])) {
 
                     players_list[choix[key]].number_of_vote++;
                     number_of_vote++;
@@ -194,7 +215,7 @@ function vote_conseil_gorgee(key){
             var max = 0;
             for (key in choix) {
 
-                if (choix.hasOwnProperty(key)) {
+                if (choix.hasOwnProperty(key)  && players_list.hasOwnProperty(choix[key])) {
 
                     if (players_list[choix[key]].number_of_vote > max) {
                         max = players_list[choix[key]].number_of_vote;
@@ -242,10 +263,7 @@ function vote_conseil_gorgee(key){
                     $("#btn_suivant_reponse_conseil_gorgees").show();
                 }
 
-                console.log(124);
                 laPartieDuModeEnCoursEstFinis = true;
-
-                console.log("Je redéfinis la fct car j'en ai plus besoin");
 
                 statusRef.off();
 
@@ -260,9 +278,10 @@ function vote_conseil_gorgee(key){
     });
 }
 
-
 function modeConseilGorgees(){
-    console.log("mode conseil gorgées");
+
+    console.log("modeConseilGorgees");
+
 
     if (superUser){
         remplisDBmodeConseilGorgees();
@@ -270,6 +289,8 @@ function modeConseilGorgees(){
 }
 
 function remplisDBmodeConseilGorgees(){
+
+    console.log("remplisDBmodeConseilGorgees");
 
     var playerRef = firebase.database().ref('questions/conseil_gorgees');
 
@@ -307,6 +328,8 @@ function remplisDBmodeConseilGorgees(){
 
 function clear_conseil_gorgees(){
 
+    console.log("clear conseil gorgées");
+
 
     $("#btn_suivant_reponse_conseil_gorgees").hide();
     $("#reponse_conseil_gorgees").hide();
@@ -322,10 +345,27 @@ function clear_conseil_gorgees(){
     }
 }
 
+function hideAllConseilGorgees(){
+    $("#conseil_des_gorgees").hide();
+    $("#reponse_conseil_gorgees").hide();
+}
+
 /*************** Pour combien   *********************/
 
 function sendPourCombien(){
+    console.log("sendPourCombien");
+
+
     var prix = $("#pour_combien_input").val();
+
+    if (isNaN(prix)){
+        showAlert("La somme doit être un nombre!");
+        return;
+    }
+    if (prix.length == 0) {
+        showAlert("Il faut rentrer un nombre!");
+        return;
+    }
 
     if (prix <= 1000000000) {
 
@@ -339,6 +379,8 @@ function sendPourCombien(){
 }
 
 function showResultPourCombien(){
+    console.log("showResultPourCombien");
+
 
     $("#spinner").show();
     var playerRef = firebase.database().ref('partie/' + code + '/pour_combien/');
@@ -357,13 +399,13 @@ function showResultPourCombien(){
 
             for (var key in questions) {
 
-                if (key != pour_combien_info.user) {
+                if (key != pour_combien_info.user && players_list.hasOwnProperty(key)) {
                     //ce n'est pas la réponse mais les autres propositions
                     $("#reponse_pour_combien_contenu").append("<div class=\"card\" style=\"width: 20%;display:inline-block\">\n" +
                         "<div><img class=\"card-img-top\" src=" + players_list[key].image + " alt=\"Card image\"></div>\n" +
                         "<div class=\"card-title\" style=\"margin-bottom:0.2rem;margin-top:0.2rem;\">" + players_list[key].username + "<br/>" + questions[key] + "</div>\n" +
                         "</div>");
-                } else {
+                } else if (players_list.hasOwnProperty(key)){
                     $("#reponse_pour_combien_reponse").append("<div class=\"card\" style=\"width: 20%;display:inline-block\">\n" +
                         "<div><img class=\"card-img-top\" src=" + players_list[key].image + " alt=\"Card image\"></div>\n" +
                         "<div class=\"card-title\" style=\"margin-bottom:0.2rem;margin-top:0.2rem;\">" + players_list[key].username + "<br/>" + questions[key] + "</div>\n" +
@@ -378,8 +420,8 @@ function showResultPourCombien(){
                 indiqueLesPerdantsPourCombien();
             }
 
-
             $("#spinner").hide();
+            $("#pour_combien_page1").show();
 
         }
 
@@ -392,6 +434,8 @@ function showResultPourCombien(){
 }
 
 function showModePourCombien(){
+    console.log("showModePourCombien");
+
 
     var playerRef = firebase.database().ref('partie/' + code + '/game/');
 
@@ -414,7 +458,7 @@ function showModePourCombien(){
 }
 
 function modePourCombien() {
-    console.log("mode pour combien");
+    console.log("modePourCombien");
 
     if (superUser){
 
@@ -427,6 +471,7 @@ function modePourCombien() {
 }
 
 function remplisDBmodePourCombien(user_key){
+    console.log("remplisDBmodePourCombien");
 
     var playerRef = firebase.database().ref('questions/pour_combien');
 
@@ -464,12 +509,15 @@ function remplisDBmodePourCombien(user_key){
 }
 
 function indiqueLesPerdantsPourCombien(){
-    console.log(80);
+    console.log("indiqueLesPerdantsPourCombien");
+
     laPartieDuModeEnCoursEstFinis = true;
     $("#btn_suivant_reponse_pour_combien").show();
 }
 
 function showDeuxiemePage(){
+    console.log("showDeuxiemePage");
+
 
     $("#pour_combien_page1").hide();
     var bestDifference = 1000000000000;
@@ -479,18 +527,22 @@ function showDeuxiemePage(){
 
     for (var key in pour_combien_result){
 
-        var difference = result - pour_combien_result[key];
+        if (key!=pour_combien_info.user && players_list.hasOwnProperty(key)) {
 
-        if (difference<0)
-            difference = -difference;
+            var difference = result - pour_combien_result[key];
 
-        if (difference>=worstDifference){
-            worstDifference=difference;
-            worstid = key;
-        }
-        if (difference<=bestDifference){
-            bestDifference = difference;
-            bestid=key;
+            if (difference < 0)
+                difference = -difference;
+
+            if (difference >= worstDifference) {
+                worstDifference = difference;
+                worstid = key;
+            }
+            if (difference <= bestDifference) {
+                bestDifference = difference;
+                bestid = key;
+            }
+
         }
 
     }
@@ -516,11 +568,15 @@ function showDeuxiemePage(){
 }
 
 function showPremierePage(){
+    console.log("showPremierePage");
+
     $("#pour_combien_page2").hide();
     $("#pour_combien_page1").show();
 }
 
 function clear_pour_combien() {
+
+    console.log("clear pour combien");
 
     $("#btn_suivant_reponse_pour_combien").hide();
     $("#reponse_pour_combien").hide();
@@ -536,4 +592,9 @@ function clear_pour_combien() {
         mode_actuel='A determiner';
         agisEnFonctionDuMode();
     }
+}
+
+function hideAllPourCombien(){
+    $("#pour_combien").hide();
+    $("#reponse_pour_combien").hide();
 }
