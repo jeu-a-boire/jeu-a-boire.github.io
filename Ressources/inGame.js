@@ -550,15 +550,23 @@ function showDeuxiemePage(){
     $("#pour_combien_tu_bois").html("");
     $("#pour_combien_tu_distribue").html("");
 
-    $("#pour_combien_tu_bois").append("<div class=\"card\" style=\"width: 20%;display:inline-block\">\n" +
-        "<div><img class=\"card-img-top\" src=" + players_list[worstid].image + " alt=\"Card image\"></div>\n" +
-        "<div class=\"card-title\" style=\"margin-bottom:0.2rem;margin-top:0.2rem;\">" + players_list[worstid].username+"</div>\n" +
-        "</div>");
+    if (players_list.hasOwnProperty(worstid)) {
 
-    $("#pour_combien_tu_distribue").append("<div class=\"card\" style=\"width: 20%;display:inline-block\">\n" +
-        "<div><img class=\"card-img-top\" src=" + players_list[bestid].image + " alt=\"Card image\"></div>\n" +
-        "<div class=\"card-title\" style=\"margin-bottom:0.2rem;margin-top:0.2rem;\">" + players_list[bestid].username+"</div>\n" +
-        "</div>");
+        $("#pour_combien_tu_bois").append("<div class=\"card\" style=\"width: 20%;display:inline-block\">\n" +
+            "<div><img class=\"card-img-top\" src=" + players_list[worstid].image + " alt=\"Card image\"></div>\n" +
+            "<div class=\"card-title\" style=\"margin-bottom:0.2rem;margin-top:0.2rem;\">" + players_list[worstid].username + "</div>\n" +
+            "</div>");
+
+    }
+
+    if (players_list.hasOwnProperty(bestid)) {
+
+        $("#pour_combien_tu_distribue").append("<div class=\"card\" style=\"width: 20%;display:inline-block\">\n" +
+            "<div><img class=\"card-img-top\" src=" + players_list[bestid].image + " alt=\"Card image\"></div>\n" +
+            "<div class=\"card-title\" style=\"margin-bottom:0.2rem;margin-top:0.2rem;\">" + players_list[bestid].username + "</div>\n" +
+            "</div>");
+
+    }
 
     if (superUser){
         $("#pour_combien_page2").append("<span class=\"glowing-glowing-blue\" id=\"btn_next_pour_combien\" style=\"width: 20%;position: fixed;right: 5%;bottom: 5%;\" onclick=\"clear_pour_combien();\">&#10140;</span>");

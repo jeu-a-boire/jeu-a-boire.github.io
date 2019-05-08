@@ -7,6 +7,8 @@
 
 <link rel="stylesheet" href="Ressources/style.css">
 <link rel="stylesheet" href="Ressources/sidenav.css">
+<link rel="stylesheet" href="Ressources/background.css">
+<link rel="stylesheet" href="Ressources/designText.css">
 <link rel="stylesheet" href="Ressources/glowing.css">
 <link rel="stylesheet" href="Ressources/inGame.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -100,7 +102,7 @@
 
     </div>
 
-    <div id="gameDiv" style="display: none">
+    <div id="gameDiv" style="display: none;margin: 7% 5%;width: 90%">
 
         <span id="btn_nav_in_game" style="display:none;position: absolute;width: 8%;top:3%;left:3%;cursor:pointer" onclick="openInGameNav()">&#9776;</span>
 
@@ -109,15 +111,19 @@
         </div>
 
         <div id="conseil_des_gorgees">
-            <h3 style="width: 100%;text-align: center;">Conseil des gorgées</h3>
-            <div style="width: 100%;text-align: center;" id="conseil_gorgees_phrase"></div>
+
+            <h2 class="design_title">Conseil des gorgées</h2>
+
+            <div class="design_text" id="conseil_gorgees_phrase"></div>
             <div id="conseil_gorgees_personnage_affichage"></div>
 
         </div>
 
         <div id="reponse_conseil_gorgees">
 
-            <h3 style="width: 100%;text-align: center;" id="txt_reponse_conseil_gorgees">La personne choisie pour l'instant est :</h3>
+            <h2 class="design_title">Conseil des gorgées</h2>
+
+            <div class="design_text" id="txt_reponse_conseil_gorgees">La personne choisie pour l'instant est :</div>
             <div id="contenu_reponse_conseil_gorgees"></div>
             <span class="glowing-glowing-blue" id="btn_suivant_reponse_conseil_gorgees" style="width: 20%;position: fixed;right: 5%;bottom: 5%;" onclick="clear_conseil_gorgees()">&#10140;</span>
         </div>
@@ -126,9 +132,10 @@
 
         </div>
 
-        <div id="pour_combien" style="margin: 10%;width: 80%">
-            <h6 style="width: 100%;text-align: center;">Pour combien?</h6>
-            <div id="pour_combien_phrase"></div>
+        <div id="pour_combien">
+
+            <h3 class="design_title">Pour combien?</h3>
+            <div class="design_text" id="pour_combien_phrase"></div>
             <input id="pour_combien_input" class="input_txt" type="number" placeholder="1000000€"/>
             <button type="button" id="btn_envoyer_pour_combien" class="btn btn-dark" onclick="sendPourCombien()">OK</button>
 
@@ -136,16 +143,18 @@
 
         <div id="reponse_pour_combien">
             <div id="pour_combien_page1">
-                <h3 style='width: 100%;text-align: center'>Les joueurs ont joués :</h3>
+                <h3 class="design_title">Pour combien?</h3>
+                <div class="design_text">Les joueurs ont joués :</div>
                 <div id="reponse_pour_combien_contenu"></div>
-                <h4 style='width: 100%;text-align: center'>La réponse était : </h4>
+                <div class="design_text">La réponse était : </div>
                 <div id="reponse_pour_combien_reponse"></div>
                 <span class="glowing-glowing-blue" id="btn_suivant_reponse_pour_combien" style="width: 20%;position: fixed;right: 5%;bottom: 5%;" onclick="showDeuxiemePage();">&#10140;</span>
             </div>
             <div id="pour_combien_page2" style="margin-bottom: 25%">
-                <h3 style='width: 100%;text-align: center'>Cette personne boit 2 gorgées :</h3>
+                <h3 class="design_title">Pour combien?</h3>
+                <h3 class="design_text">Cette personne boit 2 gorgées :</h3>
                 <div id="pour_combien_tu_bois"></div>
-                <h4 style='width: 100%;text-align: center'>Cette personne distribue 2 gorgées :</h4>
+                <h4 class="design_text">Cette personne distribue 2 gorgées :</h4>
                 <div id="pour_combien_tu_distribue"></div>
                 <span class="glowing-glowing-blue" id="btn_retour_reponse_pour_combien" style="width: 20%;position: fixed;transform: rotate(180deg);left: 5%;bottom: 5%;" onclick="showPremierePage();">&#10140;</span>
             </div>
@@ -167,8 +176,6 @@
     <img alt="close" class="closebtn" src="Ressources/img/close.png" onclick="closeInGameNav()"/>
     <a href="#" style="margin-top: 15%" onclick="revenirAuMenuPrincipal()">Revenir au menu principal</a>
 </div>
-
-
 
 <div id="spinner">
 
