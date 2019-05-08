@@ -28,6 +28,15 @@ function getAUserRandom(){
 
 }
 
+/**
+ *
+ * @returns 2 gorgées, par exemple
+ */
+function getANumberOfGorgees(){
+    //return entre 0 et 5
+    return getRandomInt(5)+1;
+}
+
 function getQuestion(name){
 
     var playerRef = firebase.database().ref('questions/'+name);

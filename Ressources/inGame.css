@@ -49,3 +49,7 @@
 #contenu_reponse_conseil_gorgees{
     display:flex;justify-content:center;align-items:center;
 }
+
+#NormalMode{
+    display: none;
+}

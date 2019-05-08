@@ -135,6 +135,7 @@ function revenirAuMenuPrincipal(){
         firebase.database().ref('partie/' + code + '/conseil_gorgees/').remove();
         firebase.database().ref('partie/' + code + '/game/').remove();
         firebase.database().ref('partie/' + code + '/modes/').remove();
+        firebase.database().ref('partie/' + code + '/mode/').remove();
         firebase.database().ref('partie/' + code + '/pour_combien/').remove();
 
     }else{
