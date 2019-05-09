@@ -37,6 +37,15 @@ function getANumberOfGorgees(){
     return getRandomInt(5)+1;
 }
 
+function getStringGorgees(nbGorgees) {
+
+    if (nbGorgees>1)
+        return "gorgées";
+    else
+        return "gorgée"
+
+}
+
 function getQuestion(name){
 
     var playerRef = firebase.database().ref('questions/'+name);

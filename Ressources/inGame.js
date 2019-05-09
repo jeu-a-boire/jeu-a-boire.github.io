@@ -255,9 +255,9 @@ function vote_conseil_gorgee(key){
                 }
             } else {
                 if (k > 1) {
-                    $("#txt_reponse_conseil_gorgees").html("Les personnes suivantes sont choisies et doivent boire "+ conseil_gorgees_info.bois +" gorgées :");
+                    $("#txt_reponse_conseil_gorgees").html("Les personnes suivantes sont choisies et doivent boire "+ conseil_gorgees_info.bois +" "+ getStringGorgees(conseil_gorgees_info.bois) +" :");
                 } else {
-                    $("#txt_reponse_conseil_gorgees").html("La personne suivante est choisie et doit boire "+conseil_gorgees_info.bois+" gorgées :");
+                    $("#txt_reponse_conseil_gorgees").html("La personne suivante est choisie et doit boire "+conseil_gorgees_info.bois+" "+getStringGorgees(conseil_gorgees_info.bois)+" :");
                 }
 
                 if (superUser) {
@@ -579,8 +579,8 @@ function showDeuxiemePage(){
         $("#pour_combien_page2").append("<span class=\"glowing-glowing-blue\" id=\"btn_next_pour_combien\" style=\"width: 20%;position: fixed;right: 5%;bottom: 5%;\" onclick=\"clear_pour_combien();\">&#10140;</span>");
     }
 
-    $("#pour_combien_bois_txt").html("Cette personne boit " + pour_combien_info.bois + " gorgées :");
-    $("#pour_combien_distribue_txt").html("Cette personne distribue " + pour_combien_info.distribue + " gorgées :");
+    $("#pour_combien_bois_txt").html("Cette personne boit " + pour_combien_info.bois +" "+getStringGorgees(pour_combien_info.bois)+" :");
+    $("#pour_combien_distribue_txt").html("Cette personne distribue " + pour_combien_info.distribue +" "+getStringGorgees(pour_combien_info.distribue)+" :");
 
     $("#pour_combien_page2").show();
 }
@@ -672,7 +672,7 @@ function remplisDBmodeNormal(){
                     str = str.replace("<prenom3>",players_list[user_key3].username);
 
                     var g1 = getANumberOfGorgees();
-                    str = str.replace("<gorgee>",g1 + " gorgées");
+                    str = str.replace("<gorgee>",g1 +" "+getStringGorgees(g1));
 
                     firebase.database().ref('partie/' + code + '/game/').set({
                         question:str
