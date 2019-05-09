@@ -665,7 +665,6 @@ function remplisDBmodeNormal(){
 
                     }
 
-
                     str = str.replace("<prenom>",players_list[user_key].username);
                     str = str.replace("<prenom1>",players_list[user_key].username);
                     str = str.replace("<prenom2>",players_list[user_key2].username);
