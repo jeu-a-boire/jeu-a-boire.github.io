@@ -213,10 +213,6 @@ $(document).ready(function () {
         $(this).css("height",h/100*12);
     });
 
-    $('.height-5').each(function(){
-        $(this).css("height",h/20);
-    });
-
 
 });
 
