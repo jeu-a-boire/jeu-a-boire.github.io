@@ -208,6 +208,8 @@ function quitterLaPartie() {
 
 /************************               Gère la taille de certaines choses      *****************************/
 
+var h,w;
+
 $(document).ready(function() {
 
     window.mobileAndTabletcheck = function() {
@@ -217,18 +219,19 @@ $(document).ready(function() {
     };
 
     //if (mobileAndTabletcheck()){
-        var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-        var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-        $(".input_txt").each(function(){
-
-            console.log($(this));
-            $(this).attr("height","100px");
-
-        });
+        w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+        h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        $("html").css({"width":w,"height":h});
+        $("body").css({"width":w,"height":h});
     //}
 
 });
 
+$(window).resize(function(){
+    showAlert("resize");
+    $("html").css({"width":w,"height":h});
+    $("body").css({"width":w,"height":h});
+});
 
 
 
