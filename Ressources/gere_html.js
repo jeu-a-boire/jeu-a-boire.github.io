@@ -209,16 +209,12 @@ $(document).ready(function () {
 
     var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
-    $('.height-20').each(function(){
-        $(this).css("height",h/5);
+    $('.height-12').each(function(){
+        $(this).css("height",h/100*12);
     });
 
-    $('.height-13').each(function(){
-        $(this).css("height",h/7.69);
-    });
-
-    $('.height-10').each(function(){
-        $(this).css("height",h/10);
+    $('.height-5').each(function(){
+        $(this).css("height",h/20);
     });
 
 
