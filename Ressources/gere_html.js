@@ -209,10 +209,6 @@ function quitterLaPartie() {
 /************************               Gère la taille de certaines choses      *****************************/
 
 $(document).ready(function() {
-    var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-    var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-
-    console.log(w + " " + h);
 
     window.mobileAndTabletcheck = function() {
         var check = false;
@@ -220,9 +216,16 @@ $(document).ready(function() {
         return check;
     };
 
-    if (mobileAndTabletcheck()){
-        showAlert("MOBILE");
-    }
+    //if (mobileAndTabletcheck()){
+        var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+        var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        $(".input_txt").each(function(){
+
+            console.log($(this));
+            $(this).attr("height","100px");
+
+        });
+    //}
 
 });
 
@@ -273,12 +276,6 @@ function glowing_without_database(contexte,color,glow){
     $('#' + contexte.id).attr('class', className);
 
 }
-
-
-
-
-
-
 
 
 
