@@ -97,10 +97,9 @@
         <span class="glowing-glowing-blue " id="btn_glowing_play" style="display:none;" onclick="play()">&#10140;</span>
         <span class="glowing-glowing-green" id="btn_glowing_1" style="display:block;width: 80%;margin: 5% 10%" onclick="glowing(this,'green')">Commun</span>
         <span class="glowing" id="btn_glowing_2" style="display:block;width: 80%;margin: 5% 10%" onclick="glowing(this,'green')">Conseil des gorgées</span>
-        <span class="glowing" id="btn_glowing_3" style="display:block;width: 80%;margin: 5% 10%" onclick="glowing(this,'green')">Devine tête</span>
+        <span class="glowing" id="btn_glowing_3" style="display:block;width: 80%;margin: 5% 10%" onclick="glowing(this,'green')">Dilemme</span>
         <span class="glowing" id="btn_glowing_4" style="display:block;width: 80%;margin: 5% 10%" onclick="glowing(this,'green')">Pour combien</span>
         <!--<span class="glowing" id="btn_glowing_5" style="display:block;width: 80%;margin: 5% 10%" onclick="glowing(this,'green')">Jeu de Vianney</span>-->
-        <!-- Dilemme -->
 
     </div>
 
@@ -117,7 +116,6 @@
         <div id="conseil_des_gorgees">
 
             <h2 class="design_title" style="font-size: 9vw">Conseil des gorgées</h2>
-
             <div class="design_text" id="conseil_gorgees_phrase"></div>
             <div id="conseil_gorgees_personnage_affichage"></div>
 
@@ -132,9 +130,38 @@
             <span class="glowing-glowing-blue height-12" id="btn_suivant_reponse_conseil_gorgees" style="width: 20%;position: fixed;right: 5%;bottom: 5%;" onclick="clear_conseil_gorgees()">&#10140;</span>
         </div>
 
-        <div id="devine_tete">
+        <div id="dilemme">
+
+            <h3 class="design_title" style="font-size: 15vw;">Dilemme</h3>
+            <button type="button" id="btn_haut_dilemme" class="btn btn-primary btn_dilemme"></button>
+            <button type="button" id="btn_bas_dilemme" class="btn btn-danger btn_dilemme"></button>
 
         </div>
+
+        <div id="reponse_dilemme">
+
+            <h3 class="design_title" style="font-size: 15vw;">Dilemme</h3>
+            <div id="myProgress_dilemme_haut" class="btn_dilemme">
+                <button type="button" id="myBar_dilemme_haut" class="btn btn-primary reponse_dilemme_btn"></button>
+            </div>
+            <div id="myProgress_dilemme_bas" class="btn_dilemme">
+                <button type="button" id="myBar_dilemme_bas" class="btn btn-danger reponse_dilemme_btn"></button>
+            </div>
+
+            <span class="glowing-glowing-blue height-12" id="btn_suivant_dilemme" style="display:none;width: 20%;position: fixed;right: 5%;bottom: 5%;" onclick="showDilemmeReponse()">&#10140;</span>
+
+        </div>
+
+        <div id="reponse_dilemme_2">
+
+            <h3 class="design_title" style="font-size: 15vw;">Dilemme</h3>
+            <div class="design_text" id="txt_reponse_dilemme"></div>
+            <div id="contenu_dilemme"></div>
+            <span class="glowing-glowing-blue height-12" id="btn_suivant_reponse_dilemme" style="display:none;width: 20%;position: fixed;right: 5%;bottom: 5%;" onclick="clearDilemme()">&#10140;</span>
+
+        </div>
+
+
 
         <div id="pour_combien">
 

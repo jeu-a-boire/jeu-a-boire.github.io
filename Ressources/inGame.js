@@ -4,6 +4,9 @@ var pour_combien_result;
 var conseil_gorgees_info;
 var conseil_gorgees_question;
 var normal_info;
+var dilemme_info;
+var reponse_dilemme;
+var choix_majorite_dilemme;
 var laPartieDuModeEnCoursEstFinis = false;
 
 function choisisUnMode(){
@@ -32,8 +35,8 @@ function agisEnFonctionDuMode() {
         case 'Conseil des gorgées':
             modeConseilGorgees();
             break;
-        case 'Devine tête':
-            modeDevineTete();
+        case 'Dilemme':
+            modeDilemme();
             break;
         case 'Pour combien':
             modePourCombien();
@@ -44,10 +47,6 @@ function agisEnFonctionDuMode() {
             choisisUnMode();
             break;
     }
-}
-
-function modeDevineTete(){
-    console.log("modeDevineTete");
 }
 
 function reagisAuModeActuel(){
@@ -86,10 +85,10 @@ function showMode(){
             spinner.hide();
             showModeConseilGorgees();
             break;
-        case 'Devine tête':
+        case 'Dilemme':
             body.show();
             spinner.hide();
-            showModeDevineTete();
+            showModeDilemme();
             break;
         case 'Pour combien':
             body.show();
@@ -117,6 +116,292 @@ function hideAllModes(){
     hideAllConseilGorgees();
     hideAllPourCombien();
     hideAllCommun();
+    hideAllDilemme();
+}
+
+/***************    Dilemme     ********************/
+
+function showModeDilemme(){
+    console.log("ShowModeDilemme");
+
+    $("#spinner").show();
+    $("#body").hide();
+
+    var playerRef = firebase.database().ref('partie/' + code + '/game/');
+
+    playerRef.once('value', function (snapshot) {
+
+        var questions = snapshot.val();
+
+        var h = questions.question[1];
+        var b = questions.question[2];
+        dilemme_info = questions;
+
+        $("#btn_haut_dilemme").html(h);
+        $("#btn_bas_dilemme").html(b);
+
+        $("#btn_haut_dilemme").click(function () {
+            voteDilemme(h);
+        });
+
+        $("#btn_bas_dilemme").click(function () {
+            voteDilemme(b);
+        });
+
+
+
+        $("#spinner").hide();
+        $("#dilemme").show();
+        $("#body").show();
+
+    });
+
+
+}
+
+function voteDilemme(k){
+    console.log("voteDilemme");
+
+    $("#spinner").show();
+    $("#body").hide();
+
+    firebase.database().ref('partie/' + code + '/dilemme/'+player_key).set(k);
+
+    var statusRef = firebase.database().ref('partie/'+ code +'/dilemme/');
+
+    statusRef.on('value', function(snapshot) {
+
+        $("#myBar_dilemme_bas").css("width","0%");
+        $("#myBar_dilemme_haut").css("width","0%");
+        clearTimeout(timeOut);
+        realW1=0;
+        realW2=0;
+
+        var rep = snapshot.val();
+        reponse_dilemme = rep;
+        var countH = 0;
+        var countB = 0;
+
+        for (var key in rep){
+
+            if (rep.hasOwnProperty(key)){
+
+                if (rep[key] == dilemme_info.question[1]){
+                    countH++;
+                }else{
+                    countB++;
+                }
+
+            }
+
+        }
+
+        if (countH + countB == numberOfPlayer){
+            statusRef.off();
+            $("#btn_suivant_dilemme").show();
+        }
+
+        var r1 = countH/(countB+countH);
+        var r2 = countB/(countB+countH);
+
+
+        $("#myBar_dilemme_haut").html(dilemme_info.question[1] + " (" + Math.round(r1*10000)/100+"%)");
+        $("#myBar_dilemme_bas").html(dilemme_info.question[2] + " (" + Math.round(r2*10000)/100+"%)");
+
+        if (countH == 0){
+            $("#myBar_dilemme_haut").removeClass("btn-primary");
+        }else{
+            $("#myBar_dilemme_haut").addClass("btn-primary");
+        }
+        if (countB == 0){
+            $("#myBar_dilemme_bas").removeClass("btn-danger");
+        }else{
+            $("#myBar_dilemme_bas").addClass("btn-danger");
+        }
+
+        rempliBarReponseDilemme(Math.round(r1*10000)/100,Math.round(r2*10000)/100);
+
+        if (r1>r2){
+            choix_majorite_dilemme = 0;
+        }
+        else if (r1<r2)
+            choix_majorite_dilemme = 1;
+        else
+            choix_majorite_dilemme = 2;
+
+        $("#dilemme").hide();
+        $("#reponse_dilemme").show();
+        $("#spinner").hide();
+        $("#body").show();
+
+    });
+
+}
+
+var realW1=0,realW2=0;
+var timeOut;
+
+function rempliBarReponseDilemme(w1,w2){
+
+
+    if (realW1<w1){
+        $("#myBar_dilemme_haut").css("width",realW1+"%");
+    }
+
+    if (realW2<w2){
+        $("#myBar_dilemme_bas").css("width",realW2+"%");
+    }
+
+    if (realW1>w1 && realW2>w2){
+        return;
+    }
+
+    realW1 += w1/100;
+    realW2 += w2/100;
+
+    timeOut = setTimeout(rempliBarReponseDilemme,30,w1,w2);
+
+}
+
+function modeDilemme(){
+    console.log("modeDilemme");
+
+    if (superUser){
+        remplisDBmodeDilemme();
+    }
+}
+
+function remplisDBmodeDilemme(){
+
+    console.log("remplisDBmodeDilemme");
+
+    var playerRef = firebase.database().ref('questions/dilemme');
+
+    playerRef.once('value', function (snapshot) {
+
+        var questions = snapshot.val();
+        var k=0;
+
+        var r = getRandomInt(questions.nombre);
+
+        for(var key in questions){
+
+            if (questions.hasOwnProperty(key) && key!='nombre'){
+
+                if (k==r) {
+
+                    var str = questions[key];
+
+                    var g1 = getANumberOfGorgees();
+
+                    firebase.database().ref('partie/' + code + '/game/').set({
+                        question:str,
+                        bois:g1
+                    });
+
+                    firebase.database().ref('partie/' + code + '/mode/').set('Dilemme');
+
+
+                }
+
+                k++;
+            }
+
+        }
+
+    });
+}
+
+function showDilemmeReponse(){
+
+    var strChoix;
+
+    $("#contenu_dilemme").html("");
+
+    console.log(choix_majorite_dilemme);
+
+    if (choix_majorite_dilemme == 0){
+        strChoix = dilemme_info.question[1];
+    }
+    else if (choix_majorite_dilemme == 1){
+        strChoix = dilemme_info.question[2];
+    }
+    else{
+        strChoix = "";
+    }
+
+    console.log(strChoix);
+    var k = 0;
+
+    console.log(reponse_dilemme);
+
+    for (var key in reponse_dilemme){
+
+        if (reponse_dilemme.hasOwnProperty(key)){
+
+            if (reponse_dilemme[key] != strChoix || choix_majorite_dilemme == 2){
+
+                if (players_list.hasOwnProperty(key)) {
+
+                    $("#contenu_dilemme").append("<div class=\"card\" style=\"width: 20%;display:inline-block\">\n" +
+                        "<div><img class=\"card-img-top\" src=" + players_list[key].image + " alt=\"Card image\"></div>\n" +
+                        "<div class=\"card-title\" style=\"margin-bottom:0.2rem;margin-top:0.2rem;\">" + players_list[key].username + "</div>\n" +
+                        "</div>");
+
+                    k++;
+
+                }
+
+            }
+
+        }
+
+    }
+
+    if (choix_majorite_dilemme == 2)
+        $("#txt_reponse_dilemme").html("Egalité, tout le monde bois " + dilemme_info.bois +" "+getStringGorgees(dilemme_info.bois)+"!");
+    else{
+        if (k>1){
+            $("#txt_reponse_dilemme").html("Les personnes suivantes boivent " + dilemme_info.bois +" "+getStringGorgees(dilemme_info.bois)+" :");
+        }
+        else if (k==0){
+            $("#txt_reponse_dilemme").html("Vous avez de la chance, personne ne boit!");
+        }
+        else{
+            $("#txt_reponse_dilemme").html("La personne suivante boit " + dilemme_info.bois +" "+getStringGorgees(dilemme_info.bois)+" :");
+        }
+    }
+
+    if (superUser){
+        $("#btn_suivant_reponse_dilemme").show();
+    }
+
+    $("#reponse_dilemme").hide();
+    $("#reponse_dilemme_2").show();
+}
+
+function clearDilemme(){
+    console.log("clearDilemme");
+
+    $("#reponse_dilemme_2").hide();
+    $("#btn_suivant_dilemme").hide();
+    $("#body").hide();
+    $("#spinner").show();
+
+    if (superUser) {
+        firebase.database().ref('partie/' + code + '/dilemme/').remove();
+        firebase.database().ref('partie/' + code + '/game/').remove();
+        firebase.database().ref('partie/' + code + '/mode/').set('A determiner');
+        mode_actuel='A determiner';
+        agisEnFonctionDuMode();
+    }
+}
+
+function hideAllDilemme(){
+    $("#reponse_dilemme_2").hide();
+    $("#reponse_dilemme").hide();
+    $("#dilemme").hide();
+    $("#btn_suivant_dilemme").hide();
 }
 
 /***************  Conseil des gorgées   ******************/
@@ -168,7 +453,7 @@ function vote_conseil_gorgee(key){
 
     console.log("vote_conseil_gorgee");
 
-    $("#spinner").show;
+    $("#spinner").show();
     $("#body").hide();
 
 

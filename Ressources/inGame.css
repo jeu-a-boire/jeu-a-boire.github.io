@@ -43,13 +43,48 @@
 }
 
 #conseil_gorgees_personnage_affichage{
-    display:flex;justify-content:center;align-items:center;
+    display:inline-block;
+    width: 100%;
 }
 
 #contenu_reponse_conseil_gorgees{
-    display:flex;justify-content:center;align-items:center;
+    display:inline-block;
+    width: 100%;
 }
 
 #NormalMode{
+    display: none;
+}
+
+#dilemme{
+    display: none;
+}
+
+.btn_dilemme{
+    width: 100%;
+    height: 30vh;
+    margin-bottom: 10vh;
+}
+
+#reponse_dilemme{
+    display: none;
+}
+
+#myProgress_dilemme_haut{
+    background-color: rgba(0, 123, 255, 0.3);
+    text-align: center;
+}
+
+#myProgress_dilemme_bas{
+    text-align: center;
+    background-color: rgba(220, 53, 69, 0.31);
+}
+
+.reponse_dilemme_btn{
+    height: 100%;
+    float: left;
+}
+
+#reponse_dilemme_2{
     display: none;
 }
