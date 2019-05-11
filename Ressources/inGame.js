@@ -337,7 +337,6 @@ function showDilemmeReponse(){
         strChoix = "";
     }
 
-    console.log(strChoix);
     var k = 0;
 
     console.log(reponse_dilemme);
