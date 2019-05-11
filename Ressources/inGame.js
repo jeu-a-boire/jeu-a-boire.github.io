@@ -328,10 +328,10 @@ function showDilemmeReponse(){
     console.log(choix_majorite_dilemme);
 
     if (choix_majorite_dilemme == 0){
-        strChoix = dilemme_info.question[1];
+        strChoix = 1;
     }
     else if (choix_majorite_dilemme == 1){
-        strChoix = dilemme_info.question[2];
+        strChoix = 2;
     }
     else{
         strChoix = "";
@@ -743,7 +743,7 @@ function showModePourCombien(){
         pour_combien_info = questions;
 
         if (questions.user == player_key) {
-            $("#pour_combien_phrase").html(questions.question + "<br/>(Indique pour combien tu le ferais :)");
+            $("#pour_combien_phrase").html(questions.question + "<br/>(Indique pour combien tu le ferais)");
         }
         else{
             $("#pour_combien_phrase").html(questions.question);
