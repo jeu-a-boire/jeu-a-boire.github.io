@@ -102,6 +102,7 @@ function showMode(){
                 clear_conseil_gorgees();
                 clear_pour_combien();
                 clearCommun();
+                clearDilemme();
             }
             break;
     }
@@ -141,11 +142,11 @@ function showModeDilemme(){
         $("#btn_bas_dilemme").html(b);
 
         $("#btn_haut_dilemme").click(function () {
-            voteDilemme(h);
+            voteDilemme(1);
         });
 
         $("#btn_bas_dilemme").click(function () {
-            voteDilemme(b);
+            voteDilemme(2);
         });
 
 
@@ -171,71 +172,77 @@ function voteDilemme(k){
 
     statusRef.on('value', function(snapshot) {
 
-        $("#myBar_dilemme_bas").css("width","0%");
-        $("#myBar_dilemme_haut").css("width","0%");
-        clearTimeout(timeOut);
-        realW1=0;
-        realW2=0;
+        dilemmeReagisAuVoteDesAutres(snapshot,statusRef)
 
-        var rep = snapshot.val();
-        reponse_dilemme = rep;
-        var countH = 0;
-        var countB = 0;
+    });
 
-        for (var key in rep){
+}
 
-            if (rep.hasOwnProperty(key)){
+function dilemmeReagisAuVoteDesAutres(snapshot,statusRef){
 
-                if (rep[key] == dilemme_info.question[1]){
-                    countH++;
-                }else{
-                    countB++;
-                }
+    $("#myBar_dilemme_bas").css("width","0%");
+    $("#myBar_dilemme_haut").css("width","0%");
+    clearTimeout(timeOut);
+    realW1=0;
+    realW2=0;
 
+    var rep = snapshot.val();
+    reponse_dilemme = rep;
+    var countH = 0;
+    var countB = 0;
+
+    for (var key in rep){
+
+        if (rep.hasOwnProperty(key)){
+
+
+            if (rep[key] == 1){
+                countH++;
+            }else if (rep[key] == 2){
+                countB++;
             }
 
         }
 
-        if (countH + countB == numberOfPlayer){
-            statusRef.off();
-            $("#btn_suivant_dilemme").show();
-        }
+    }
 
-        var r1 = countH/(countB+countH);
-        var r2 = countB/(countB+countH);
+    if (countH + countB == numberOfPlayer){
+        statusRef.off();
+        $("#btn_suivant_dilemme").show();
+    }
+
+    var r1 = countH/(countB+countH);
+    var r2 = countB/(countB+countH);
 
 
-        $("#myBar_dilemme_haut").html(dilemme_info.question[1] + " (" + Math.round(r1*10000)/100+"%)");
-        $("#myBar_dilemme_bas").html(dilemme_info.question[2] + " (" + Math.round(r2*10000)/100+"%)");
+    $("#myBar_dilemme_haut").html(dilemme_info.question[1] + " (" + Math.round(r1*10000)/100+"%)");
+    $("#myBar_dilemme_bas").html(dilemme_info.question[2] + " (" + Math.round(r2*10000)/100+"%)");
 
-        if (countH == 0){
-            $("#myBar_dilemme_haut").removeClass("btn-primary");
-        }else{
-            $("#myBar_dilemme_haut").addClass("btn-primary");
-        }
-        if (countB == 0){
-            $("#myBar_dilemme_bas").removeClass("btn-danger");
-        }else{
-            $("#myBar_dilemme_bas").addClass("btn-danger");
-        }
+    if (countH == 0){
+        $("#myBar_dilemme_haut").removeClass("btn-primary");
+    }else{
+        $("#myBar_dilemme_haut").addClass("btn-primary");
+    }
+    if (countB == 0){
+        $("#myBar_dilemme_bas").removeClass("btn-danger");
+    }else{
+        $("#myBar_dilemme_bas").addClass("btn-danger");
+    }
 
-        rempliBarReponseDilemme(Math.round(r1*10000)/100,Math.round(r2*10000)/100);
+    rempliBarReponseDilemme(Math.round(r1*10000)/100,Math.round(r2*10000)/100);
 
-        if (r1>r2){
-            choix_majorite_dilemme = 0;
-        }
-        else if (r1<r2)
-            choix_majorite_dilemme = 1;
-        else
-            choix_majorite_dilemme = 2;
+    if (r1>r2){
+        choix_majorite_dilemme = 0;
+    }
+    else if (r1<r2)
+        choix_majorite_dilemme = 1;
+    else
+        choix_majorite_dilemme = 2;
 
-        $("#dilemme").hide();
-        $("#reponse_dilemme").show();
-        $("#spinner").hide();
-        $("#body").show();
-
-    });
-
+    $("#dilemme").hide();
+    $("#reponse_dilemme").show();
+    $("#spinner").hide();
+    $("#body").show();
 }
 
 var realW1=0,realW2=0;
@@ -384,7 +391,9 @@ function clearDilemme(){
     console.log("clearDilemme");
 
     $("#reponse_dilemme_2").hide();
+    $("#reponse_dilemme").hide();
     $("#btn_suivant_dilemme").hide();
+    $("#dilemme").hide();
     $("#body").hide();
     $("#spinner").show();
 
@@ -398,6 +407,7 @@ function clearDilemme(){
 }
 
 function hideAllDilemme(){
+    console.log("hideAllDilemme");
     $("#reponse_dilemme_2").hide();
     $("#reponse_dilemme").hide();
     $("#dilemme").hide();
