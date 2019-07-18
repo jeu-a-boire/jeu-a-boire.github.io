@@ -1,9 +1,9 @@
 ﻿<!DOCTYPE html>
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if IE 9]>         <html class="no-js ie9"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if IE 9]><html class="no-js ie9"> <![endif]-->
 <!--[if gt IE 9]><!--><html class="no-js"><!--<![endif]-->
 
-<!-- Mirrored from nasfactor.com/themes/newyork/html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 03 Sep 2017 09:42:18 GMT -->
+<!-- Mirrored from nasfactor.com/themes/newyork/html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 03 Sep 2017 09:41:43 GMT -->
 <head>
 <meta charset="utf-8">
 <title>NY - HTML Theme</title>
@@ -15,15 +15,6 @@ Meta tags
 <meta name="description" content="">
 <meta content="yes" name="apple-mobile-web-app-capable" />
 <meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1, user-scalable=no" />
-
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-9736245503398616",
-        enable_page_level_ads: true
-    });
-</script>
 
 
 <!--=================================
@@ -47,7 +38,9 @@ Style Sheets
 <link rel="stylesheet" type="text/css" href="assets/css/switcher.css">
 <link rel="stylesheet" href="assets/css/main.css">
 
-<link rel="stylesheet" id="layout-color" type="text/css" href="assets/css/switcHelper.css">
+<link rel="stylesheet" id="layout-color" type="text/css" href="assets/css/skins/switcHelper.css">
+
+
 
 <!--=================NY Skin colors============================================
     Chose any one skin to use, and uncomment the css file of selected color -->
@@ -57,9 +50,11 @@ Style Sheets
 <!--<link rel="stylesheet" type="text/css" href="assets/css/skins/color4.css">-->
 <!--<link rel="stylesheet" type="text/css" href="assets/css/skins/color5.css">-->
 
+
+
 <script src="assets/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
-<body data-spy="scroll" data-target="#sticktop" data-offset="70">
+<body data-spy="scroll" data-target="#sticktop" data-offset="110">
 
 
 <!-- Preloader -->
@@ -74,29 +69,43 @@ Style Sheets
 
 
 
-
 <!--=================================
-Home
-=================================-->
+ Home
+ =================================-->
 
-<section id="home" class="static-header parallax hero-parallax">
+<section id="home" class="hero full_width_slider">
 	<div class="overlay"></div>
-	<div class="static-content">
+	<div class="hero-content">
         <div class="container">
             <img class="logo" src="assets/img/basic/logo.png" alt="">
-            <h5>the umtimate</h5>
-            <h1>parallax experience</h1>
-            <ul class="home-nav">   
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#team">team</a></li>
-                <li><a href="#profile">facts</a></li>
-                <li><a href="#portfolio">portfolio</a></li>
-                <li><a href="#features">features</a></li>
-                <li><a href="#hire-us">hire us</a></li>
-                <li><a href="#getintouch">contact us</a></li>
-            </ul> 
-            <a class="btn" href="#">learn more</a>
+                <div class="text-fadder flexslider">
+                    <ul class="slides">
+                        <li>
+                            <h5>the umtimate</h5>
+                            <h1>parallax experience</h1>
+                        </li>
+                        <li>
+                            <h5>the Limitless</h5>
+                            <h1>user experience</h1>
+                        </li>
+                        <li>
+                            <h5>the extra-ordinary</h5>
+                            <h1>Web experience</h1>
+                        </li>
+                    </ul>
+                </div>
+            
+                 <ul class="home-nav">   
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#team">team</a></li>
+                    <li><a href="#profile">facts</a></li>
+                    <li><a href="#portfolio">portfolio</a></li>
+                    <li><a href="#features">features</a></li>
+                    <li><a href="#hire-us">hire us</a></li>
+                    <li><a href="#getintouch">contact us</a></li>
+                </ul> 
+                <a class="btn" href="#">learn more</a>
         </div>
     </div>
     <a class="scroller" href="#about"></a>        
@@ -104,6 +113,7 @@ Home
 <!--=================================
 header
 =================================-->
+
 
 <header id="sticktop">
   <nav class="navbar navbar-default">
@@ -116,7 +126,7 @@ header
           
           	<li class="dropdown"><a>Home</a>
             	<ul class="dropdown-menu">
-                    <li class="dropdown-submenu"><a href="#">Home Layout 1</a>
+                    <li class="dropdown-submenu active"><a href="#">Home Layout 1</a>
                         <ul class="dropdown-menu">
                             <li><a href="index.html">Header 1</a></li>
                             <li><a href="index-1b.html">Header 2</a></li>
@@ -128,7 +138,7 @@ header
                     <li class="dropdown-submenu"><a href="#">Home Layout 2</a>
                         <ul class="dropdown-menu">
                             <li><a href="index2.html">Header 6</a></li>
-                            <li><a href="index.html">Header 7</a></li>
+                            <li><a href="index2b.html">Header 7</a></li>
                             <li><a href="index2c.html">Header 8</a></li>
                             <li><a href="index2d.html">Header 9</a></li>
                             <li><a href="index2e.html">Header 10</a></li>
@@ -138,11 +148,12 @@ header
                 </ul>
             </li>
             <li><a href="#about">About</a></li>
-            <li><a href="#portfolio">portfolio</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#team">team</a></li>
             <li><a href="#profile">facts</a></li>
+            <li><a href="#portfolio">portfolio</a></li>
             <li><a href="#features">features</a></li>
+            <li><a href="#hire-us">hire us</a></li>
             <li><a href="#getintouch">contact us</a></li>
           
         </ul>
@@ -152,22 +163,260 @@ header
   </nav>
 </header>
 
+
+
 <!--=================================
 About
 =================================-->
-<section id="about" class="style2">
+<section id="about">
 <div class="container">
-	
+	<div class="row">
+        <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 about-inner">
             <h2>About Newyork studio</h2>
             <h3>We help build identities from concept to launch. </h3>
             <h4>We rock at web/mobile design & development, apps, branding, and Drupal.</h4>
-        	<img class="about-mockup-wide" src="assets/img/basic/browser-mockup.jpg" alt="/">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing. Quisque congue dui et justo vulputate, eget vehicula lorem fringilla. Vestibulum vitae edor dolor euimod, scelerisque emenim sed, consectetur nibh.</p>
+        </div>
+        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+            <div class="visual">
+                <img class="about-mockup" src="assets/img/basic/iphone-mockup.png" alt="/">
+            </div>
+        </div>
+    </div>
 </div>
+</section>
+<!--=================================
+Services
+=================================-->
+<section id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <h2>we’re good in</h2>
+                <h4>Over the last few years we've earned a solid reputation for our 
+    <span>Web & Mobile interface</span> design.</h4>
+            </div>
+        </div>
+        <div class="row">
+        	<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="service">
+                    <div class="service-visual">
+                        <div class="service-icon">
+                            <span class="pencilIcon"></span>
+                        </div>
+                    </div><!--visual-->
+                    <div class="service-content">
+                        <h5>design</h5>
+                        <ul>
+                            <li>Website Design</li>
+                            <li>Mobile App Design</li>
+                            <li>Branding</li>
+                            <li>Web App Design</li>
+                        </ul>
+                    </div><!--content-->
+                </div><!--service-->
+            </div>
+            
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="service">
+                    <div class="service-visual">
+                        <div class="service-icon">
+                            <span class="beakerIcon"></span>
+                        </div>
+                    </div><!--visual-->
+                    <div class="service-content">
+                        <h5>development</h5>
+                        <ul>
+                            <li>Website Design</li>
+                            <li>Mobile App Design</li>
+                            <li>Branding</li>
+                            <li>Web App Design</li>
+                        </ul>
+                    </div><!--content-->
+                </div><!--service-->
+             </div>   
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="service">
+                    <div class="service-visual">
+                        <div class="service-icon">
+                            <span class="powerpointIcon"></span>
+                        </div>
+                    </div><!--visual-->
+                    <div class="service-content">
+                        <h5>printing</h5>
+                        <ul>
+                            <li>Website Design</li>
+                            <li>Mobile App Design</li>
+                            <li>Branding</li>
+                            <li>Web App Design</li>
+                        </ul>
+                    </div><!--content-->
+                </div><!--service-->
+             </div>   
+            
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="service">
+                    <div class="service-visual">
+                        <div class="service-icon">
+                            <span class="handIcon"></span>
+                        </div>
+                    </div><!--visual-->
+                    <div class="service-content">
+                        <h5>consultancy</h5>
+                        <ul>
+                            <li>Website Design</li>
+                            <li>Mobile App Design</li>
+                            <li>Branding</li>
+                            <li>Web App Design</li>
+                        </ul>
+                    </div><!--content-->
+                </div><!--service-->
+            </div>    
+        </div><!--wrapper-->
+    </div>
+</section>
+<!--=================================
+Promo
+=================================-->
+<section id="promo" class="parallax-one parallax">
+    <div class="container">
+    	<h5>Your own custom</h5>
+        <h1>parallax Content</h1>
+        <a href="#" class="btn">learn more</a>
+    </div>
+</section>
+<!--=================================
+Team
+=================================-->
+<section id="team">
+    <div class="container">
+    	<h2>meet the team</h2>
+        <h3>We're a small, friendly and talented team. </h3>
+        <h4>We craft beautiful digital solutions for awesome clients across all the platforms.</h4>
+        <div class="row">
+            <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
+            	<div class="team-visual">
+            		<img src="assets/img/team/1.jpg" alt="/">
+                </div>    
+            </div>
+            <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 member-visual">
+            	<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+                    <div class="member">
+                        <img src="assets/img/team/2.jpg" alt="/">
+                        <div class="member-content">
+                            <h5>john doe</h5>
+                            <h6>Founder/CEO</h6>
+                            <ul class="social">
+                                  <li><a href="#"><i class="icon-facebook"></i></a></li>
+                                  <li><a href="#"><i class=" icon-google-plus"></i></a></li>
+                                  <li><a href="#"><i class=" icon-twitter"></i></a></li>
+                                  <li><a href="#"><i class=" icon-linkedin"></i></a></li>
+                                  <li><a href="#"><i class="icon-facebook"></i></a></li>
+                             </ul>
+                         </div>
+                         <div class="clearfix"></div>
+                    </div><!--member-->
+                </div>    
+                
+                <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+                    <div class="member">
+                        <img src="assets/img/team/3.jpg" alt="/">
+                        <div class="member-content">
+                            <h5>john doe</h5>
+                            <h6>Founder/CEO</h6>
+                            <ul class="social">
+                                  <li><a href="#"><i class="icon-facebook"></i></a></li>
+                                  <li><a href="#"><i class=" icon-google-plus"></i></a></li>
+                                  <li><a href="#"><i class=" icon-twitter"></i></a></li>
+                                  <li><a href="#"><i class=" icon-linkedin"></i></a></li>
+                                  <li><a href="#"><i class="icon-facebook"></i></a></li>
+                             </ul>
+                         </div>
+                         <div class="clearfix"></div>
+                    </div><!--member-->
+                </div>
+                
+                <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+                    <div class="member">
+                        <img src="assets/img/team/4.jpg" alt="/">
+                        <div class="member-content">
+                            <h5>john doe</h5>
+                            <h6>Founder/CEO</h6>
+                            <ul class="social">
+                                  <li><a href="#"><i class="icon-facebook"></i></a></li>
+                                  <li><a href="#"><i class=" icon-google-plus"></i></a></li>
+                                  <li><a href="#"><i class=" icon-twitter"></i></a></li>
+                                  <li><a href="#"><i class=" icon-linkedin"></i></a></li>
+                                  <li><a href="#"><i class="icon-facebook"></i></a></li>
+                             </ul>
+                         </div>
+                         <div class="clearfix"></div>
+                    </div><!--member-->
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+<!--=================================
+
+=================================-->
+<section id="customer">
+	<div class="container">
+    	<h2>some important facts </h2>
+        <h3>Customer satisfaction is our first priority.</h3>
+        <h4>We have worked hard to gain hundered of staisfied clients around the globe.</h4>
+    </div>
+</section>
+<!--=================================
+profile
+=================================-->
+<section id="profile" class="profile_style1">
+    <div class="container">
+         <div class="row">
+         	<div class="col-lg-11 col-md-11 col-sm-12 col-sm-offset-0 col-lg-offset-1 col-md-offset-1">
+                <div class="records">
+                    <div class="record animate1">
+                    	<i class="barsIcon"></i>
+                        <span data-total="1192" class="stat odometer">0</span> 
+                        
+                        <h5>completed projects</h5>
+                    </div><!--\\record-->
+                    
+                    <div class="record animate2">
+                    	<i class="smilyIcon"></i>
+                        <span data-total="150" class="stat odometer"></span> 
+                        <h5>satisfied clients</h5>
+                    </div><!--\\record-->
+                    
+                    <div class="record animate3">
+                    	<i class="clockIcon"></i>
+                        <span data-total="92" class="stat odometer"></span> 
+                        <h5>working hours</h5>
+                    </div><!--\\record-->
+                    
+                    <div class="record animate4">
+                    	<i class="trophyIcon"></i>
+                        <span data-total="320" class="stat odometer"></span> 
+                        <h5>awards won</h5>
+                    </div><!--\\record-->
+                    
+                    <div class="record animate5">
+                    	<i class="coffeeIcon"></i>
+                        <span data-total="999" class="stat odometer"></span> 
+                        <h5>cup of coffee consumed</h5>
+                    </div><!--\\record-->
+                    <div class="clearfix"></div>
+                </div><!--\\records-->
+            </div>
+            </div>
+            <div class="clearfix"></div>
+        
+    </div>
 </section>
 <!--=================================
 Ajax Load
 =================================-->
-
 <div class="ajax-loader"></div>
 <div class="modal modal-wide fade in" id="ajax-Modal" tabindex="-1" role="dialog"  aria-hidden="true">
   <div class="modal-dialog container">
@@ -191,11 +440,10 @@ Ajax Load
   </div>
 </div>
 
-
 <!--=================================
 Portfolio
 =================================-->
-<section id="portfolio" class="style2">
+<section id="portfolio">
     <div class="container">
         <h2>what we’ve done</h2>
         <h3>We help build identities from concept to launch. </h3>
@@ -214,7 +462,8 @@ Portfolio
             </ul>
         </div>    
     </div>
-    <div class="projects">
+    <div class="projects-wrapper">
+        <div class="projects">
             <div class="project ajax-project type3">
                 <div class="visual">
                     <img src="assets/img/portfolio/folio-img1.jpg" alt="">
@@ -508,311 +757,12 @@ Portfolio
                     <a class="visit" href="#"></a>
                 </div>
             </div><!--project-->
-        <div class="clearfix"></div>    
-      </div>  
-
-    <div class="load-project">
-    	<div class="container">
-    	<a href="#" class="btn">LOAD MORE</a>
-        </div>
+        </div>  
+        <div class="clearfix"></div>
     </div>
          
 </section>
-<!--=================================
-Services
-=================================-->
-<section id="services" class="style-2">
-    <div class="container">
-        
-            <h2>we’re good in</h2>
-            <h4>Over the last few years we've earned a solid reputation for our 
-<span>Web & Mobile interface</span> design.</h4>
-        <div class="service-wrapper">
-        <div class="row">
-        	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="service style2">
-                <div class="service-visual">
-                    <div class="service-icon">
-                        <span class="pencilIcon"></span>
-                    </div>
-                </div><!--visual-->
-                <div class="service-content">
-                    <h5>design</h5>
-                    <ul>
-                        <li>Website Design</li>
-                        <li>Mobile App Design</li>
-                        <li>Branding</li>
-                        <li>Web App Design</li>
-                    </ul>
-                </div><!--content-->
-            </div><!--service-->
-            </div>
-            
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="service style2">
-                <div class="service-visual">
-                    <div class="service-icon">
-                        <span class="beakerIcon"></span>
-                    </div>
-                </div><!--visual-->
-                <div class="service-content">
-                    <h5>development</h5>
-                    <ul>
-                        <li>Website Design</li>
-                        <li>Mobile App Design</li>
-                        <li>Branding</li>
-                        <li>Web App Design</li>
-                    </ul>
-                </div><!--content-->
-            </div><!--service-->
-            </div>
-            
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="service style2">
-                <div class="service-visual">
-                    <div class="service-icon">
-                        <span class="powerpointIcon"></span>
-                    </div>
-                </div><!--visual-->
-                <div class="service-content">
-                    <h5>printing</h5>
-                    <ul>
-                        <li>Website Design</li>
-                        <li>Mobile App Design</li>
-                        <li>Branding</li>
-                        <li>Web App Design</li>
-                    </ul>
-                </div><!--content-->
-            </div><!--service-->
-            </div>
-            
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="service style2">
-                <div class="service-visual">
-                    <div class="service-icon">
-                        <span class="handIcon"></span>
-                    </div>
-                </div><!--visual-->
-                <div class="service-content">
-                    <h5>consultancy</h5>
-                    <ul>
-                        <li>Website Design</li>
-                        <li>Mobile App Design</li>
-                        <li>Branding</li>
-                        <li>Web App Design</li>
-                    </ul>
-                </div><!--content-->
-            </div><!--service-->
-            </div>
-            
-            </div><!--row-->
-        </div><!--wrapper-->
-    </div>
-</section>
-<!--=================================
-Promo
-=================================-->
-<section id="promo" class="parallax-one parallax">
-    <div class="container">
-    	<h5>Your own custom</h5>
-        <h1>parallax Content</h1>
-        <a href="#" class="btn">learn more</a>
-    </div>
-</section>
-<!--=================================
-Team
-=================================-->
-<section id="team" class="style2">
-    <div class="container">
-    	<h2>meet the team</h2>
-        <h3>We're a small, friendly and talented team. </h3>
-        <h4>We craft beautiful digital solutions for awesome clients across all the platforms.</h4>
-        <div class="row">
-        
-        
-            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            	<div class="member">
-                	<img src="assets/img/team/5.jpg" alt="/">
-                	<div class="member-content">
-                        <h5>john doe</h5>
-                        <h6>Founder/CEO</h6>
-                        <ul class="social">
-                              <li><a href="#"><i class="icon-facebook"></i></a></li>
-                              <li><a href="#"><i class=" icon-google-plus"></i></a></li>
-                              <li><a href="#"><i class=" icon-twitter"></i></a></li>
-                              <li><a href="#"><i class=" icon-linkedin"></i></a></li>
-                              <li><a href="#"><i class="icon-facebook"></i></a></li>
-                         </ul>
-                     </div>
-                </div><!--member-->
-                </div>
-                
-                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                <div class="member">
-                	<img src="assets/img/team/6.jpg" alt="/">
-                    <div class="member-content">
-                        <h5>john doe</h5>
-                        <h6>Founder/CEO</h6>
-                        <ul class="social">
-                              <li><a href="#"><i class="icon-facebook"></i></a></li>
-                              <li><a href="#"><i class=" icon-google-plus"></i></a></li>
-                              <li><a href="#"><i class=" icon-twitter"></i></a></li>
-                              <li><a href="#"><i class=" icon-linkedin"></i></a></li>
-                         </ul>
-                     </div>
-                </div><!--member-->
-                </div>
-                
-                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                <div class="member">
-                	<img src="assets/img/team/7.jpg" alt="/">
-                    <div class="member-content">
-                        <h5>john doe</h5>
-                        <h6>Founder/CEO</h6>
-                        <ul class="social">
-                              <li><a href="#"><i class="icon-facebook"></i></a></li>
-                              <li><a href="#"><i class=" icon-google-plus"></i></a></li>
-                              <li><a href="#"><i class=" icon-twitter"></i></a></li>
-                              <li><a href="#"><i class=" icon-linkedin"></i></a></li>
-                              <li><a href="#"><i class="icon-facebook"></i></a></li>
-                         </ul>
-                     </div>
-                </div><!--member-->
-                </div>
-                
-                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                <div class="member">
-                	<img src="assets/img/team/8.jpg" alt="/">
-                    <div class="member-content">
-                        <h5>john doe</h5>
-                        <h6>Founder/CEO</h6>
-                        <ul class="social">
-                              <li><a href="#"><i class="icon-facebook"></i></a></li>
-                              <li><a href="#"><i class=" icon-google-plus"></i></a></li>
-                              <li><a href="#"><i class=" icon-twitter"></i></a></li>
-                              <li><a href="#"><i class=" icon-linkedin"></i></a></li>
-                              <li><a href="#"><i class="icon-facebook"></i></a></li>
-                         </ul>
-                     </div>
-                </div><!--member-->
-                </div>
-                
-                
-        </div>
-    </div>
-</section>
 
-<!--=================================
-profile
-=================================-->
-<section id="profile" class="style2 parallax facts-parallax">
-	<div class="profile-inner">
-    	<div class="overlay"></div>
-        <div class="container">
-            <h2>some important facts </h2>
-            <h3>Customer satisfaction is our first priority.</h3>
-            <h4>We have worked hard to gain hundered of staisfied clients around the globe.</h4>
-             <div class="row">
-                <div class="col-lg-11 col-md-11 col-sm-12 col-sm-offset-0 col-lg-offset-1 col-md-offset-1">
-                    <div class="records">
-                        <div class="record animate1">
-                            <i class="barsIcon"></i>
-                            <span data-total="1192" class="stat odometer">0</span> 
-                            
-                            <h5>completed projects</h5>
-                        </div><!--\\record-->
-                        
-                        <div class="record animate2">
-                            <i class="smilyIcon"></i>
-                            <span data-total="150" class="stat odometer"></span> 
-                            <h5>satisfied clients</h5>
-                        </div><!--\\record-->
-                        
-                        <div class="record animate3">
-                            <i class="clockIcon"></i>
-                            <span data-total="92" class="stat odometer"></span> 
-                            <h5>working hours</h5>
-                        </div><!--\\record-->
-                        
-                        <div class="record animate4">
-                            <i class="trophyIcon"></i>
-                            <span data-total="320" class="stat odometer"></span> 
-                            <h5>awards won</h5>
-                        </div><!--\\record-->
-                        
-                        <div class="record animate5">
-                            <i class="coffeeIcon"></i>
-                            <span data-total="999" class="stat odometer"></span> 
-                            <h5>cup of coffee consumed</h5>
-                        </div><!--\\record-->
-                        <div class="clearfix"></div>
-                    </div><!--\\records-->
-                </div>
-             </div>
-        </div>
-     </div>   
-</section>
-
-<!--=================================
-features
-=================================-->
-<section id="features" class="style2">
-    <div class="container">
-    	<h2>Core features</h2>
-        <h3>Newyork Studio Theme comes with awesome features.</h3>
-        <h4>Some of the features which makes this theme best suitable for design studios and freelancers are as below.</h4>
-        <div class="row">
-            <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12 col-sm-offset-0 col-lg-offset-1 col-md-offset-0">
-            	<div class="feature">
-                	<div class="feature-icon"><span class="bootstrapIcon"></span></div>
-                    <div class="feature-content">
-                    	<h5>bootstrap 3.0</h5>
-                        <p>Praesent faucibus nisl sit amet nulla sollicitudin pretium a sed purus. Nullam bibendum porta</p>
-                    </div>
-                </div><!--feature-->
-                <div class="clearfix"></div>
-                
-            </div>
-            
-            <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
-            	<div class="feature">
-                	<div class="feature-icon"><span class="mobileIcon"></span></div>
-                    <div class="feature-content">
-                    	<h5>fully responsive</h5>
-                        <p>Praesent faucibus nisl sit amet nulla sollicitudin pretium a sed purus. Nullam bibendum porta</p>
-                    </div>
-                </div><!--feature-->
-                <div class="clearfix"></div>
-                
-            </div>
-            
-            <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12 col-sm-offset-0 col-lg-offset-1 col-md-offset-0">
-            	<div class="feature">
-                	<div class="feature-icon"><span class="bootstrapIcon"></span></div>
-                    <div class="feature-content">
-                    	<h5>bootstrap 3.0</h5>
-                        <p>Praesent faucibus nisl sit amet nulla sollicitudin pretium a sed purus. Nullam bibendum porta</p>
-                    </div>
-                </div><!--feature-->
-                <div class="clearfix"></div>
-                
-            </div>
-            
-            <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
-            	<div class="feature">
-                	<div class="feature-icon"><span class="mobileIcon"></span></div>
-                    <div class="feature-content">
-                    	<h5>fully responsive</h5>
-                        <p>Praesent faucibus nisl sit amet nulla sollicitudin pretium a sed purus. Nullam bibendum porta</p>
-                    </div>
-                </div><!--feature-->
-                <div class="clearfix"></div>
-                
-            </div>
-            
-        </div><!--row-->
-    </div>
-</section>
 <!--=================================
 Testimonials
 =================================-->
@@ -912,9 +862,99 @@ Testimonials
     </div>
 </section>
 <!--=================================
+features
+=================================-->
+<section id="features">
+    <div class="container">
+    	<h2>Core features</h2>
+        <h3>Newyork Studio Theme comes with awesome features.</h3>
+        <h4>Some of the features which makes this theme best suitable for design studios and freelancers are as below.</h4>
+        <div class="row">
+            <div class="col-lg-5 col-md-6 col-sm-7 col-xs-12">
+            	<div class="feature">
+                	<div class="feature-icon"><span class="bootstrapIcon"></span></div>
+                    <div class="feature-content">
+                    	<h5>bootstrap 3.0</h5>
+                        <p>Praesent faucibus nisl sit amet nulla sollicitudin pretium a sed purus. Nullam bibendum porta</p>
+                    </div>
+                </div><!--feature-->
+                <div class="clearfix"></div>
+                <div class="feature">
+                	<div class="feature-icon"><span class="retinaIcon"></span></div>
+                    <div class="feature-content">
+                    	<h5>retina ready</h5>
+                        <p>Praesent faucibus nisl sit amet nulla sollicitudin pretium a sed purus. Nullam bibendum porta</p>
+                    </div>
+                </div><!--feature-->
+                <div class="clearfix"></div>
+                <div class="feature">
+                	<div class="feature-icon"><span class="mobileIcon"></span></div>
+                    <div class="feature-content">
+                    	<h5>fully responsive</h5>
+                        <p>Praesent faucibus nisl sit amet nulla sollicitudin pretium a sed purus. Nullam bibendum porta</p>
+                    </div>
+                </div><!--feature-->
+                <div class="clearfix"></div>
+            </div>
+            
+            <div class="col-lg-7 col-md-6 col-sm-5 col-xs-12">
+            	<!--<div class="feature-video">
+                	<img src="assets/img/BG/features.jpg" alt="/">
+                	<a href="#"><span></span></a>                
+               	</div>-->
+                 <div class="responsive-vimeo">
+                	<iframe src="http://player.vimeo.com/video/77490970?title=0&amp;byline=0&amp;portrait=0&amp;badge=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            	</div>
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+<!--=================================
+Hire us
+=================================-->
+<section id="hire-us" class="parallax parallax-two">
+    <div class="container">
+    	<h2>Hire us</h2>
+        <h3>Looking to get a website designed or full ecommerce solution?</h3>
+        <h4>Fill in the quick form below and we will get in touch with you and help you kick start your project rightaway.</h4>
+    </div>
+    <div class="hiring-form">
+    	<div class="container">
+        	<form id="nl-form" class="nl-form">
+					I want to hire Newyork Studio for
+					<select>
+						<option value="1" selected>Website Design</option>
+						<option value="2">Logo Design</option>
+						<option value="3">Illustration</option>
+						<option value="4">Mockup</option>
+					</select>,
+					My budget is around
+					<select>
+						<option value="1" selected>$499</option>
+						<option value="2">$550</option>
+						<option value="3">$800</option>
+						<option value="4">$1000</option>
+						<option value="5">$1500</option>
+					</select>
+					Please get in touch with Me on my mobile no. 
+					<input type="text" placeholder="(xxx).xxx.xxxx" data-subline="(Area Code) Number"/>
+					or my email address 	
+					 <input type="text" placeholder="myemail@domain.com"/>
+					<div class="nl-submit-wrap">
+						<button class=" btn" type="submit">Submit</button>
+					</div>
+					<div class="nl-overlay"></div>
+				</form>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</section>
+<!--=================================
 Getintouch
 =================================-->
-<section id="getintouch" class="style2">
+<section id="getintouch">
     <div class="container">
     	<h2>get in touch</h2>
         <h3>Don't be shy, give us a shout.</h3>
@@ -983,7 +1023,7 @@ Getintouch
 <!--=================================
 Contact
 =================================-->
-<section id="contact" class="style2">
+<section id="contact">
     <div class="container">
     	<div class="contact-info contact1">
             <div class="row">
@@ -1057,10 +1097,7 @@ Suite #1007 Newyork, NY, 33179</h6>
         
     </div>
 </section>
-<!--=================================
-Footer
-=================================-->
-<footer class="style2">
+<footer>
     <div class="container">
     	<div class="row">
         	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -1111,6 +1148,8 @@ $(window).load(function() {
 </script>  
 
 
+
+
 <div id="switcher">
 	<h4>Style switcher</h4>
     <div class="toggler">
@@ -1140,9 +1179,7 @@ $(window).load(function() {
         
     </div>
     <div class="clearfix"></div>
-    
-    
-    
+     
 </div>
 
 <script>
@@ -1167,17 +1204,23 @@ $(window).load(function() {
 		
 		var state = $(this).data('toggleState');
         if(state) {
-          $('#switcher').css('left','-220px');
+           $('#switcher').css('left','-220px');
         } else {
             $('#switcher').css('left','-10px');
         }
         $(this).data('toggleState', !state);
 		
 	});
+	
+	
 		
 	
-</script>
 
+
+
+
+	
+</script>
 
 <script>
 	var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
@@ -1188,6 +1231,6 @@ $(window).load(function() {
 
 </body>
 
-<!-- Mirrored from nasfactor.com/themes/newyork/html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 03 Sep 2017 09:42:18 GMT -->
+<!-- Mirrored from nasfactor.com/themes/newyork/html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 03 Sep 2017 09:41:43 GMT -->
 </html>
 	
